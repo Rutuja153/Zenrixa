@@ -1,0 +1,1061 @@
+/* =====================================================
+   ZENRIXA - PROFILE PAGE
+   Light Pink + Light Blue + Light Purple Theme
+===================================================== */
+
+.profile-page {
+  min-height: 100vh;
+  width: 100%;
+
+  background:
+    radial-gradient(
+      circle at 8% 8%,
+      rgba(255, 182, 193, 0.28),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 92% 18%,
+      rgba(135, 206, 250, 0.24),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 50% 88%,
+      rgba(180, 160, 255, 0.22),
+      transparent 32%
+    ),
+    linear-gradient(
+      135deg,
+      #fff6fa 0%,
+      #f3f9ff 48%,
+      #f7f3ff 100%
+    );
+
+  color: #292532;
+
+  font-family:
+    "Inter",
+    "Segoe UI",
+    Arial,
+    sans-serif;
+
+  padding-bottom: 100px;
+
+  box-sizing: border-box;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.profile-header {
+  width: 100%;
+  max-width: 900px;
+
+  margin: 0 auto;
+
+  padding: 22px 25px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: rgba(255, 255, 255, 0.94);
+
+  border-bottom:
+    1px solid rgba(108, 62, 244, 0.08);
+
+  position: sticky;
+
+  top: 0;
+
+  z-index: 20;
+
+  backdrop-filter: blur(15px);
+
+  box-shadow:
+    0 5px 20px rgba(50, 35, 90, 0.06);
+}
+
+
+.profile-header h2 {
+  margin: 0;
+
+  font-size: 23px;
+
+  font-weight: 800;
+
+  color: #292532;
+
+  letter-spacing: -0.3px;
+}
+
+
+.profile-header > svg {
+  color: #51495f;
+
+  transition:
+    transform 0.2s ease,
+    color 0.2s ease;
+}
+
+
+.profile-header > svg:hover {
+  color: #6c3ef4;
+
+  transform: translateX(-3px);
+}
+
+
+/* =====================================================
+   EDIT BUTTON
+===================================================== */
+
+.edit-btn {
+  width: 42px;
+  height: 42px;
+
+  border: none;
+
+  border-radius: 13px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  background:
+    linear-gradient(
+      135deg,
+      #6c3ef4,
+      #8b65f5,
+      #a76bc5
+    );
+
+  color: white;
+
+  box-shadow:
+    0 7px 18px rgba(108, 62, 244, 0.25);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+.edit-btn:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 24px rgba(108, 62, 244, 0.35);
+}
+
+
+.edit-btn:active {
+  transform: scale(0.94);
+}
+
+
+/* =====================================================
+   PROFILE INFORMATION
+===================================================== */
+
+.profile-info {
+  max-width: 900px;
+
+  margin: 0 auto;
+
+  padding: 35px 20px 25px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  text-align: center;
+}
+
+
+/* =====================================================
+   PROFILE IMAGE
+===================================================== */
+
+.profile-info img {
+  width: 125px;
+  height: 125px;
+
+  border-radius: 50%;
+
+  object-fit: cover;
+
+  border: 5px solid #ffffff;
+
+  box-shadow:
+    0 0 0 4px rgba(108, 62, 244, 0.15),
+    0 12px 30px rgba(60, 38, 120, 0.18);
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffeaf2,
+      #eaf6ff,
+      #eee8ff
+    );
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+
+.profile-info img:hover {
+  transform: scale(1.04);
+
+  box-shadow:
+    0 0 0 5px rgba(108, 62, 244, 0.18),
+    0 15px 35px rgba(60, 38, 120, 0.22);
+}
+
+
+/* =====================================================
+   PROFILE NAME
+===================================================== */
+
+.profile-info h2 {
+  margin: 18px 0 5px;
+
+  font-size: 27px;
+
+  font-weight: 750;
+
+  color: #272330;
+
+  letter-spacing: -0.5px;
+}
+
+
+/* =====================================================
+   MOBILE NUMBER
+===================================================== */
+
+.profile-info p {
+  margin: 0;
+
+  color: #6f6975;
+
+  font-size: 15px;
+
+  font-weight: 500;
+
+  letter-spacing: 0.2px;
+}
+
+
+/* =====================================================
+   PROFILE CARDS
+===================================================== */
+
+.profile-cards {
+  width: calc(100% - 40px);
+
+  max-width: 860px;
+
+  margin: 10px auto 25px;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, 1fr);
+
+  gap: 15px;
+}
+
+
+/* =====================================================
+   SMALL CARD
+===================================================== */
+
+.small-card {
+  min-height: 95px;
+
+  padding: 18px;
+
+  box-sizing: border-box;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.98),
+      rgba(255, 255, 255, 0.93)
+    );
+
+  border:
+    1px solid rgba(108, 62, 244, 0.08);
+
+  border-radius: 20px;
+
+  box-shadow:
+    0 8px 25px rgba(43, 31, 80, 0.07);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+
+.small-card:hover {
+  transform: translateY(-3px);
+
+  background:
+    linear-gradient(
+      135deg,
+      #fffafd,
+      #f7fbff,
+      #faf8ff
+    );
+
+  box-shadow:
+    0 12px 30px rgba(43, 31, 80, 0.11);
+}
+
+
+/* =====================================================
+   CARD ICON
+===================================================== */
+
+.small-card > svg {
+  width: 42px;
+  height: 42px;
+
+  padding: 10px;
+
+  box-sizing: border-box;
+
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffeef5,
+      #edf7ff,
+      #f0ebff
+    );
+
+  color: #6c3ef4;
+
+  flex-shrink: 0;
+}
+
+
+/* =====================================================
+   CARD TEXT
+===================================================== */
+
+.small-card span {
+  display: block;
+
+  font-size: 12px;
+
+  color: #85808b;
+
+  margin-bottom: 5px;
+
+  font-weight: 600;
+}
+
+
+.small-card h3 {
+  margin: 0;
+
+  font-size: 17px;
+
+  color: #302b38;
+
+  font-weight: 700;
+
+  word-break: break-word;
+}
+
+
+/* =====================================================
+   MENU
+===================================================== */
+
+.menu {
+  width: calc(100% - 40px);
+
+  max-width: 860px;
+
+  margin: 0 auto;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 11px;
+}
+
+
+/* =====================================================
+   MENU ITEM
+===================================================== */
+
+.menu > div {
+  min-height: 65px;
+
+  padding: 13px 17px;
+
+  box-sizing: border-box;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  background:
+    rgba(255, 255, 255, 0.96);
+
+  border:
+    1px solid rgba(108, 62, 244, 0.07);
+
+  border-radius: 17px;
+
+  box-shadow:
+    0 5px 18px rgba(43, 31, 80, 0.055);
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+
+.menu > div:hover {
+  transform: translateX(4px);
+
+  background:
+    linear-gradient(
+      135deg,
+      #fffafd,
+      #f6fbff,
+      #faf8ff
+    );
+
+  box-shadow:
+    0 8px 22px rgba(43, 31, 80, 0.09);
+}
+
+
+.menu > div:active {
+  transform: scale(0.98);
+}
+
+
+/* =====================================================
+   MENU ICON
+===================================================== */
+
+.menu > div > svg:first-child {
+  width: 22px;
+
+  height: 22px;
+
+  padding: 9px;
+
+  box-sizing: content-box;
+
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffeef5,
+      #edf7ff,
+      #f0ebff
+    );
+
+  color: #6c3ef4;
+
+  flex-shrink: 0;
+}
+
+
+/* =====================================================
+   MENU TEXT
+===================================================== */
+
+.menu > div span {
+  flex: 1;
+
+  color: #302a40;
+
+  font-size: 15px;
+
+  font-weight: 600;
+}
+
+
+/* =====================================================
+   MENU RIGHT ARROW
+===================================================== */
+
+.menu > div > svg:last-child {
+  width: 19px;
+
+  color: #aaa;
+
+  flex-shrink: 0;
+
+  transition:
+    transform 0.2s ease,
+    color 0.2s ease;
+}
+
+
+.menu > div:hover > svg:last-child {
+  color: #6c3ef4;
+
+  transform: translateX(3px);
+}
+
+
+/* =====================================================
+   BOTTOM NAVIGATION
+===================================================== */
+
+.bottom-nav {
+  position: fixed;
+
+  left: 50%;
+
+  bottom: 0;
+
+  transform: translateX(-50%);
+
+  width: 100%;
+
+  max-width: 900px;
+
+  min-height: 74px;
+
+  padding:
+    8px 12px
+    calc(8px + env(safe-area-inset-bottom));
+
+  box-sizing: border-box;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  align-items: center;
+
+  background:
+    rgba(255, 255, 255, 0.96);
+
+  border-top:
+    1px solid rgba(108, 62, 244, 0.09);
+
+  box-shadow:
+    0 -7px 25px rgba(37, 24, 75, 0.08);
+
+  backdrop-filter: blur(15px);
+
+  z-index: 100;
+}
+
+
+/* =====================================================
+   BOTTOM NAV ITEM
+===================================================== */
+
+.bottom-nav > div {
+  height: 58px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 4px;
+
+  color: #92909a;
+
+  cursor: pointer;
+
+  border-radius: 15px;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+.bottom-nav > div:hover {
+  color: #6c3ef4;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fff0f6,
+      #eef7ff,
+      #f2edff
+    );
+}
+
+
+.bottom-nav > div:active {
+  transform: scale(0.93);
+}
+
+
+/* =====================================================
+   NAV ICON
+===================================================== */
+
+.bottom-nav svg {
+  width: 21px;
+
+  height: 21px;
+}
+
+
+/* =====================================================
+   NAV TEXT
+===================================================== */
+
+.bottom-nav span {
+  font-size: 11px;
+
+  font-weight: 600;
+}
+
+
+/* =====================================================
+   ACTIVE PROFILE
+===================================================== */
+
+.bottom-nav .active {
+  color: #6c3ef4;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffeef5,
+      #edf7ff,
+      #f0ebff
+    );
+}
+
+
+.bottom-nav .active svg {
+  stroke-width: 2.7;
+}
+
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+.profile-loading {
+  min-height: 100vh;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 30px;
+
+  box-sizing: border-box;
+
+  text-align: center;
+
+  background:
+    radial-gradient(
+      circle at 10% 10%,
+      rgba(255, 182, 193, 0.25),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 90% 20%,
+      rgba(135, 206, 250, 0.22),
+      transparent 30%
+    ),
+    linear-gradient(
+      135deg,
+      #fff6fa,
+      #f3f9ff,
+      #f7f3ff
+    );
+}
+
+
+.profile-loading h3 {
+  margin: 0 0 18px;
+
+  color: #302b38;
+
+  font-size: 20px;
+}
+
+
+/* =====================================================
+   ERROR BUTTON
+===================================================== */
+
+.profile-loading button {
+  border: none;
+
+  padding: 12px 22px;
+
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #6c3ef4,
+      #8b65f5,
+      #a76bc5
+    );
+
+  color: white;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 7px 18px rgba(108, 62, 244, 0.25);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+.profile-loading button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 25px rgba(108, 62, 244, 0.32);
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (min-width: 601px) {
+
+  .profile-header {
+    padding-left: 35px;
+    padding-right: 35px;
+  }
+
+
+  .profile-info {
+    padding-top: 45px;
+  }
+
+
+  .profile-info img {
+    width: 140px;
+    height: 140px;
+  }
+
+
+  .profile-info h2 {
+    font-size: 30px;
+  }
+
+
+  .bottom-nav {
+    border-radius:
+      22px 22px 0 0;
+  }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+  .profile-page {
+    padding-bottom: 90px;
+  }
+
+
+  .profile-header {
+    padding:
+      17px
+      18px;
+  }
+
+
+  .profile-header h2 {
+    font-size: 20px;
+  }
+
+
+  .edit-btn {
+    width: 39px;
+
+    height: 39px;
+
+    border-radius: 12px;
+  }
+
+
+  .profile-info {
+    padding:
+      30px
+      18px
+      20px;
+  }
+
+
+  .profile-info img {
+    width: 112px;
+
+    height: 112px;
+
+    border-width: 4px;
+  }
+
+
+  .profile-info h2 {
+    font-size: 24px;
+
+    margin-top: 15px;
+  }
+
+
+  .profile-info p {
+    font-size: 14px;
+  }
+
+
+  .profile-cards {
+    width: calc(100% - 28px);
+
+    grid-template-columns:
+      repeat(2, 1fr);
+
+    gap: 10px;
+
+    margin-bottom: 20px;
+  }
+
+
+  .small-card {
+    min-height: 105px;
+
+    padding: 13px;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: flex-start;
+
+    gap: 9px;
+
+    border-radius: 17px;
+  }
+
+
+  .small-card > svg {
+    width: 25px;
+
+    height: 25px;
+
+    padding: 8px;
+  }
+
+
+  .small-card span {
+    font-size: 11px;
+  }
+
+
+  .small-card h3 {
+    font-size: 15px;
+  }
+
+
+  .menu {
+    width: calc(100% - 28px);
+
+    gap: 9px;
+  }
+
+
+  .menu > div {
+    min-height: 61px;
+
+    padding:
+      11px
+      13px;
+
+    gap: 11px;
+
+    border-radius: 15px;
+  }
+
+
+  .menu > div > svg:first-child {
+    width: 19px;
+
+    height: 19px;
+
+    padding: 8px;
+  }
+
+
+  .menu > div span {
+    font-size: 14px;
+  }
+
+
+  .menu > div > svg:last-child {
+    width: 17px;
+  }
+
+
+  .bottom-nav {
+    min-height: 70px;
+
+    padding:
+      6px
+      8px
+      calc(6px + env(safe-area-inset-bottom));
+  }
+
+
+  .bottom-nav > div {
+    height: 54px;
+  }
+
+
+  .bottom-nav svg {
+    width: 20px;
+
+    height: 20px;
+  }
+
+
+  .bottom-nav span {
+    font-size: 10px;
+  }
+
+}
+
+
+/* =====================================================
+   VERY SMALL MOBILE
+===================================================== */
+
+@media (max-width: 380px) {
+
+  .profile-header {
+    padding-left: 14px;
+
+    padding-right: 14px;
+  }
+
+
+  .profile-info img {
+    width: 100px;
+
+    height: 100px;
+  }
+
+
+  .profile-info h2 {
+    font-size: 22px;
+  }
+
+
+  .profile-cards {
+    width: calc(100% - 22px);
+
+    gap: 8px;
+  }
+
+
+  .small-card {
+    padding: 11px;
+  }
+
+
+  .small-card h3 {
+    font-size: 14px;
+  }
+
+
+  .menu {
+    width: calc(100% - 22px);
+  }
+
+
+  .menu > div span {
+    font-size: 13px;
+  }
+
+}
+
+
+/* =====================================================
+   ACCESSIBILITY
+===================================================== */
+
+button:focus-visible {
+  outline:
+    3px solid rgba(90, 45, 224, 0.25);
+
+  outline-offset: 2px;
+}
+
+
+/* =====================================================
+   REDUCED MOTION
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+
+    transition: none !important;
+  }
+
+}

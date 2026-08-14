@@ -1,0 +1,499 @@
+
+/* ================================
+   Emergency Call Page
+================================ */
+
+.emergency-page {
+  min-height: 100vh;
+  padding: 25px;
+  background: linear-gradient(
+    135deg,
+    #fff5f5 0%,
+    #ffffff 45%,
+    #fff0f2 100%
+  );
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+}
+
+
+/* ================================
+   Header
+================================ */
+
+.emergency-header {
+  max-width: 850px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 0 20px;
+}
+
+.emergency-header .back {
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #333;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  transition: 0.3s ease;
+}
+
+.emergency-header .back:hover {
+  background: #e91e63;
+  color: white;
+  transform: translateX(-3px);
+}
+
+.emergency-header h2 {
+  margin: 0;
+  color: #222;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.emergency-header p {
+  margin: 5px 0 0;
+  color: #777;
+  font-size: 14px;
+}
+
+
+/* ================================
+   Emergency Banner
+================================ */
+
+.emergency-banner {
+  max-width: 850px;
+  margin: 10px auto 25px;
+
+  display: flex;
+  align-items: center;
+  gap: 18px;
+
+  padding: 20px 22px;
+
+  border-radius: 20px;
+
+  background: linear-gradient(
+    135deg,
+    #e91e63,
+    #c2185b
+  );
+
+  color: white;
+
+  box-shadow:
+    0 10px 30px rgba(233, 30, 99, 0.25);
+
+  position: relative;
+  overflow: hidden;
+}
+
+.emergency-banner::after {
+  content: "";
+  position: absolute;
+
+  width: 130px;
+  height: 130px;
+
+  right: -45px;
+  top: -50px;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.banner-icon {
+  width: 55px;
+  height: 55px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 16px;
+
+  background: rgba(255, 255, 255, 0.18);
+
+  flex-shrink: 0;
+}
+
+.emergency-banner h3 {
+  margin: 0 0 5px;
+  font-size: 19px;
+}
+
+.emergency-banner p {
+  margin: 0;
+  font-size: 13px;
+  opacity: 0.9;
+}
+
+
+/* ================================
+   Service List
+================================ */
+
+.service-list {
+  max-width: 850px;
+  margin: auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+
+/* ================================
+   Service Card
+================================ */
+
+.service-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 18px 20px;
+
+  background: rgba(255, 255, 255, 0.95);
+
+  border-radius: 18px;
+
+  border: 1px solid #eeeeee;
+
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.06);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card::before {
+  content: "";
+
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  width: 5px;
+  height: 100%;
+
+  background: #e91e63;
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.11);
+}
+
+
+/* ================================
+   Service Left
+================================ */
+
+.service-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.service-icon {
+  width: 58px;
+  height: 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 17px;
+
+  background: #fff0f4;
+  color: #e91e63;
+
+  transition: 0.3s ease;
+}
+
+.service-card:hover .service-icon {
+  transform: scale(1.08);
+}
+
+.service-info h3 {
+  margin: 0 0 6px;
+
+  font-size: 17px;
+  color: #222;
+
+  font-weight: 700;
+}
+
+.service-info p {
+  margin: 0;
+
+  font-size: 15px;
+
+  color: #777;
+
+  font-weight: 600;
+
+  letter-spacing: 0.5px;
+}
+
+
+/* ================================
+   Call Button
+================================ */
+
+.call-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  min-width: 90px;
+
+  border: none;
+
+  padding: 11px 17px;
+
+  border-radius: 12px;
+
+  background: #6c3ef4;
+
+  color: white;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 5px 15px rgba(233, 30, 99, 0.25);
+
+  transition: 0.3s ease;
+}
+
+.call-btn:hover {
+  background: #c2185b;
+
+  transform: scale(1.05);
+
+  box-shadow:
+    0 8px 20px rgba(233, 30, 99, 0.35);
+}
+
+.call-btn:active {
+  transform: scale(0.96);
+}
+
+
+/* ================================
+   Different Service Colors
+================================ */
+
+.service-card.police::before {
+  background: #2563eb;
+}
+
+.service-card.police .service-icon {
+  color: #2563eb;
+  background: #eff6ff;
+}
+
+.service-card.ambulance::before {
+  background: #16a34a;
+}
+
+.service-card.ambulance .service-icon {
+  color: #16a34a;
+  background: #f0fdf4;
+}
+
+.service-card.fire::before {
+  background: #f97316;
+}
+
+.service-card.fire .service-icon {
+  color: #f97316;
+  background: #fff7ed;
+}
+
+.service-card.women::before {
+  background: #e91e63;
+}
+
+.service-card.women .service-icon {
+  color: #e91e63;
+  background: #fff0f4;
+}
+
+.service-card.emergency::before {
+  background: #dc2626;
+}
+
+.service-card.emergency .service-icon {
+  color: #dc2626;
+  background: #fef2f2;
+}
+
+
+/* ================================
+   Bottom Note
+================================ */
+
+.emergency-note {
+  max-width: 850px;
+
+  margin: 22px auto 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  padding: 14px;
+
+  border-radius: 12px;
+
+  background: #fff;
+
+  color: #777;
+
+  font-size: 12px;
+
+  border: 1px solid #eeeeee;
+}
+
+.emergency-note svg {
+  color: #e91e63;
+}
+
+
+/* ================================
+   Tablet
+================================ */
+
+@media (max-width: 768px) {
+
+  .emergency-page {
+    padding: 18px;
+  }
+
+  .emergency-header h2 {
+    font-size: 24px;
+  }
+
+  .emergency-banner {
+    padding: 17px;
+  }
+
+  .service-card {
+    padding: 16px;
+  }
+
+}
+
+
+/* ================================
+   Mobile
+================================ */
+
+@media (max-width: 500px) {
+
+  .emergency-page {
+    padding: 14px;
+  }
+
+  .emergency-header {
+    gap: 12px;
+  }
+
+  .emergency-header .back {
+    width: 40px;
+    height: 40px;
+  }
+
+  .emergency-header h2 {
+    font-size: 21px;
+  }
+
+  .emergency-header p {
+    font-size: 12px;
+  }
+
+  .emergency-banner {
+    gap: 12px;
+    padding: 15px;
+    border-radius: 16px;
+  }
+
+  .banner-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .emergency-banner h3 {
+    font-size: 16px;
+  }
+
+  .emergency-banner p {
+    font-size: 11px;
+  }
+
+  .service-card {
+    padding: 14px;
+    border-radius: 15px;
+  }
+
+  .service-left {
+    gap: 11px;
+  }
+
+  .service-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+  }
+
+  .service-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .service-info h3 {
+    font-size: 14px;
+  }
+
+  .service-info p {
+    font-size: 13px;
+  }
+
+  .call-btn {
+    min-width: 70px;
+    padding: 9px 11px;
+    font-size: 12px;
+  }
+
+  .call-btn svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .emergency-note {
+    font-size: 10px;
+    text-align: center;
+  }
+}

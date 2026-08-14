@@ -1,0 +1,962 @@
+/* =========================================================
+   ZENRIXA HOME PAGE
+   MIXED LIGHT PINK + BLUE + PURPLE BACKGROUND
+   NORMAL DARK TEXT
+========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+.home {
+  min-height: 100vh;
+  width: 100%;
+
+  background:
+    radial-gradient(
+      circle at 12% 12%,
+      rgba(255, 182, 210, 0.55),
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at 88% 20%,
+      rgba(170, 215, 255, 0.55),
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at 50% 88%,
+      rgba(200, 175, 245, 0.55),
+      transparent 40%
+    ),
+    linear-gradient(
+      120deg,
+      #fff0f6 0%,
+      #edf7ff 50%,
+      #f1ebff 100%
+    );
+
+  background-attachment: fixed;
+
+  color: #222222;
+
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  padding-bottom: 100px;
+}
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.navbar {
+  width: 100%;
+  min-height: 82px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 18px 7%;
+
+  background: rgba(255, 255, 255, 0.82);
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.9);
+
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+}
+
+
+/* =========================================================
+   WELCOME SECTION
+========================================================= */
+
+.welcome-section h2 {
+  margin: 0;
+
+  font-size: 22px;
+  font-weight: 750;
+
+  color: #222222;
+
+  letter-spacing: -0.4px;
+}
+
+.welcome-section p {
+  margin: 5px 0 0;
+
+  font-size: 13px;
+
+  color: #555555;
+
+  font-weight: 500;
+}
+
+
+/* =========================================================
+   NAV RIGHT
+========================================================= */
+
+.nav-right {
+  display: flex;
+  align-items: center;
+
+  gap: 18px;
+}
+
+
+/* =========================================================
+   NOTIFICATION
+========================================================= */
+
+.notification-box {
+  position: relative;
+
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fff0f7,
+      #edf5ff
+    );
+
+  cursor: pointer;
+
+  transition: 0.25s ease;
+
+  box-shadow:
+    0 5px 18px
+    rgba(70, 50, 120, 0.10);
+}
+
+.notification-box:hover {
+  background:
+    linear-gradient(
+      135deg,
+      #ffe5f1,
+      #e5f1ff
+    );
+
+  transform: translateY(-2px);
+}
+
+.notification-box .icon {
+  width: 21px;
+  height: 21px;
+
+  color: #e53935;
+}
+
+
+/* =========================================================
+   NOTIFICATION POPUP
+========================================================= */
+
+.notification-popup {
+  position: absolute;
+
+  top: 52px;
+  right: 0;
+
+  width: 310px;
+  max-height: 360px;
+
+  overflow-y: auto;
+
+  background: rgba(255, 255, 255, 0.96);
+
+  border-radius: 18px;
+
+  padding: 18px;
+
+  box-shadow:
+    0 18px 45px
+    rgba(37, 25, 82, 0.16);
+
+  border: 1px solid rgba(255, 255, 255, 0.9);
+
+  z-index: 200;
+
+  animation:
+    notificationOpen 0.2s ease;
+
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+}
+
+@keyframes notificationOpen {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.notification-popup h4 {
+  margin: 0 0 14px;
+
+  font-size: 16px;
+
+  color: #29213f;
+}
+
+.notification-popup > p {
+  margin: 15px 0;
+
+  text-align: center;
+
+  color: #666666;
+
+  font-size: 13px;
+}
+
+.notification-item {
+  padding: 12px;
+
+  margin-bottom: 8px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fff3f8,
+      #f1f7ff
+    );
+
+  border-radius: 12px;
+
+  border-left: 3px solid #e53935;
+}
+
+.notification-item strong {
+  display: block;
+
+  font-size: 13px;
+
+  color: #222222;
+}
+
+.notification-item p {
+  margin: 5px 0 0;
+
+  font-size: 12px;
+
+  line-height: 1.5;
+
+  color: #555555;
+}
+
+
+/* =========================================================
+   PROFILE AVATAR
+========================================================= */
+
+.avatar {
+  width: 48px;
+  height: 48px;
+
+  border-radius: 50%;
+
+  object-fit: cover;
+
+  border: 3px solid white;
+
+  box-shadow:
+    0 5px 16px
+    rgba(108, 62, 244, 0.22);
+
+  cursor: pointer;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.avatar:hover {
+  transform: scale(1.07);
+
+  box-shadow:
+    0 8px 22px
+    rgba(108, 62, 244, 0.32);
+}
+
+
+/* =========================================================
+   SAFETY CARD
+========================================================= */
+
+.safety-card {
+  width: 86%;
+  max-width: 1100px;
+
+  margin: 28px auto 0;
+
+  padding: 22px 25px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 232, 244, 0.88),
+      rgba(232, 245, 255, 0.88),
+      rgba(241, 234, 255, 0.88)
+    );
+
+  border:
+    1px solid rgba(255, 255, 255, 0.9);
+
+  border-radius: 20px;
+
+  box-shadow:
+    0 8px 25px
+    rgba(72, 49, 135, 0.09);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.safety-card svg {
+  flex-shrink: 0;
+
+  padding: 8px;
+
+  width: 52px;
+  height: 52px;
+
+  border-radius: 15px;
+
+  background: rgba(255, 255, 255, 0.90);
+
+  box-shadow:
+    0 5px 15px
+    rgba(108, 62, 244, 0.12);
+}
+
+.safety-card h3 {
+  margin: 0;
+
+  font-size: 17px;
+
+  font-weight: 700;
+
+  color: #292929;
+}
+
+.safety-card p {
+  margin: 6px 0 0;
+
+  font-size: 13px;
+
+  color: #555555;
+}
+
+
+/* =========================================================
+   SOS SECTION
+========================================================= */
+
+.sos-section {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin: 35px auto 32px;
+}
+
+
+/* =========================================================
+   SOS BUTTON
+========================================================= */
+
+.sos-btn {
+  width: 145px;
+  height: 145px;
+
+  border-radius: 50%;
+
+  border: 8px solid #f7e6f0;
+
+  background:
+    linear-gradient(
+      145deg,
+      #ef4f85,
+      #e91e63
+    );
+
+  color: white;
+
+  font-size: 31px;
+
+  font-weight: 800;
+
+  letter-spacing: 1px;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 0 0 10px
+      rgba(255, 190, 215, 0.30),
+
+    0 16px 35px
+      rgba(233, 30, 99, 0.28);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.sos-btn:hover {
+  transform: scale(1.06);
+
+  box-shadow:
+    0 0 0 13px
+      rgba(255, 190, 215, 0.34),
+
+    0 20px 42px
+      rgba(233, 30, 99, 0.35);
+}
+
+.sos-btn:active {
+  transform: scale(0.96);
+}
+
+.sos-section p {
+  margin: 14px 0 0;
+
+  color: #555555;
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   FEATURE GRID
+========================================================= */
+
+.grid {
+  width: 86%;
+  max-width: 1100px;
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 18px;
+}
+
+
+/* =========================================================
+   FEATURE CARD
+========================================================= */
+
+.card {
+  min-height: 145px;
+
+  padding: 23px 18px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+
+  background: rgba(255, 255, 255, 0.80);
+
+  border:
+    1px solid rgba(255, 255, 255, 0.90);
+
+  border-radius: 20px;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 7px 22px
+    rgba(40, 35, 75, 0.07);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.card:hover {
+  transform: translateY(-6px);
+
+  border-color:
+    rgba(210, 195, 255, 0.95);
+
+  box-shadow:
+    0 15px 32px
+    rgba(108, 62, 244, 0.14);
+}
+
+.card svg {
+  width: 34px;
+  height: 34px;
+
+  color: #e53935;
+
+  margin-bottom: 13px;
+
+  padding: 6px;
+
+  box-sizing: content-box;
+
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fff0f6,
+      #eeebff
+    );
+}
+
+.card h4 {
+  margin: 0;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  color: #222222;
+}
+
+
+/* =========================================================
+   BOTTOM NAVIGATION
+========================================================= */
+
+.bottom-nav {
+  position: fixed;
+
+  left: 50%;
+
+  bottom: 14px;
+
+  transform: translateX(-50%);
+
+  width: 92%;
+  max-width: 650px;
+
+  height: 72px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-around;
+
+  padding: 7px;
+
+  background:
+    rgba(255, 255, 255, 0.88);
+
+  border:
+    1px solid rgba(255, 255, 255, 0.95);
+
+  border-radius: 24px;
+
+  box-shadow:
+    0 12px 40px
+    rgba(40, 30, 80, 0.15);
+
+  z-index: 500;
+
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+}
+
+
+/* =========================================================
+   NAV ITEM
+========================================================= */
+
+.nav-item,
+.bottom-nav > div {
+  width: 70px;
+  height: 58px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 4px;
+
+  border-radius: 17px;
+
+  cursor: pointer;
+
+  color: #777777;
+
+  transition: 0.25s ease;
+}
+
+.nav-item svg,
+.bottom-nav > div svg {
+  width: 21px;
+  height: 21px;
+}
+
+.nav-item span,
+.bottom-nav > div span {
+  font-size: 10px;
+
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   NAV HOVER
+========================================================= */
+
+.nav-item:hover,
+.bottom-nav > div:hover {
+  color: #e53935;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fff0f6,
+      #edf5ff
+    );
+
+  transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   SOS NAV ITEM
+========================================================= */
+
+.sos-menu {
+  color: #e53935 !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fff0f3,
+      #ffeef5
+    );
+
+  border-radius: 17px;
+}
+
+.sos-menu:hover {
+  color: #d32f2f !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffe5e5,
+      #ffeaf4
+    ) !important;
+}
+
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+.notification-popup::-webkit-scrollbar {
+  width: 5px;
+}
+
+.notification-popup::-webkit-scrollbar-thumb {
+  background:
+    linear-gradient(
+      #e8c6da,
+      #c9c0ee
+    );
+
+  border-radius: 10px;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 800px) {
+
+  .navbar {
+    padding: 16px 5%;
+  }
+
+  .safety-card,
+  .grid {
+    width: 90%;
+  }
+
+  .grid {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 550px) {
+
+  .home {
+    padding-bottom: 95px;
+
+    background:
+      radial-gradient(
+        circle at 10% 5%,
+        rgba(255, 182, 210, 0.48),
+        transparent 35%
+      ),
+      radial-gradient(
+        circle at 90% 20%,
+        rgba(170, 215, 255, 0.48),
+        transparent 35%
+      ),
+      radial-gradient(
+        circle at 50% 90%,
+        rgba(200, 175, 245, 0.48),
+        transparent 40%
+      ),
+      linear-gradient(
+        135deg,
+        #fff0f6,
+        #edf7ff,
+        #f1ebff
+      );
+
+    background-attachment: fixed;
+  }
+
+
+  /* =====================================================
+     NAVBAR
+  ===================================================== */
+
+  .navbar {
+    min-height: 75px;
+
+    padding: 14px 5%;
+  }
+
+  .welcome-section h2 {
+    font-size: 18px;
+  }
+
+  .welcome-section p {
+    font-size: 11px;
+  }
+
+  .nav-right {
+    gap: 10px;
+  }
+
+  .notification-box {
+    width: 38px;
+    height: 38px;
+  }
+
+  .avatar {
+    width: 43px;
+    height: 43px;
+  }
+
+  .notification-popup {
+    position: fixed;
+
+    top: 72px;
+
+    right: 5%;
+
+    width: 90%;
+
+    max-height: 330px;
+  }
+
+
+  /* =====================================================
+     SAFETY CARD
+  ===================================================== */
+
+  .safety-card {
+    width: 90%;
+
+    margin-top: 20px;
+
+    padding: 17px;
+
+    border-radius: 17px;
+  }
+
+  .safety-card svg {
+    width: 44px;
+    height: 44px;
+  }
+
+  .safety-card h3 {
+    font-size: 14px;
+  }
+
+  .safety-card p {
+    font-size: 11px;
+  }
+
+
+  /* =====================================================
+     SOS
+  ===================================================== */
+
+  .sos-section {
+    margin: 28px auto;
+  }
+
+  .sos-btn {
+    width: 125px;
+    height: 125px;
+
+    font-size: 27px;
+
+    border-width: 7px;
+  }
+
+
+  /* =====================================================
+     GRID
+  ===================================================== */
+
+  .grid {
+    width: 90%;
+
+    grid-template-columns:
+      repeat(2, 1fr);
+
+    gap: 12px;
+  }
+
+  .card {
+    min-height: 125px;
+
+    border-radius: 17px;
+
+    padding: 16px 10px;
+  }
+
+  .card svg {
+    width: 29px;
+    height: 29px;
+
+    margin-bottom: 9px;
+  }
+
+  .card h4 {
+    font-size: 12px;
+  }
+
+
+  /* =====================================================
+     BOTTOM NAV
+  ===================================================== */
+
+  .bottom-nav {
+    width: 94%;
+
+    height: 68px;
+
+    bottom: 10px;
+
+    border-radius: 21px;
+  }
+
+  .nav-item,
+  .bottom-nav > div {
+    width: 62px;
+    height: 54px;
+  }
+
+  .nav-item span,
+  .bottom-nav > div span {
+    font-size: 9px;
+  }
+
+}
+
+
+/* =========================================================
+   VERY SMALL DEVICES
+========================================================= */
+
+@media (max-width: 360px) {
+
+  .welcome-section h2 {
+    font-size: 16px;
+  }
+
+  .welcome-section p {
+    display: none;
+  }
+
+  .safety-card {
+    align-items: flex-start;
+  }
+
+  .grid {
+    gap: 9px;
+  }
+
+  .card {
+    min-height: 115px;
+  }
+
+  .bottom-nav {
+    width: 96%;
+  }
+
+}

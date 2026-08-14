@@ -1,0 +1,136 @@
+.about-page{
+
+  min-height:100vh;
+  background:#f5f7fb;
+  padding:20px;
+
+}
+
+
+.about-header{
+
+  display:flex;
+  align-items:center;
+  gap:15px;
+  margin-bottom:20px;
+
+}
+
+
+.about-header button{
+
+  width:42px;
+  height:42px;
+  border:none;
+  border-radius:50%;
+  background:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  cursor:pointer;
+  box-shadow:0 3px 8px rgba(0,0,0,.1);
+
+}
+
+
+.about-header h2{
+
+  color:#6C3EF4;
+  font-size:24px;
+
+}
+
+
+
+.about-card{
+
+  background:white;
+  padding:25px;
+  border-radius:20px;
+  box-shadow:0 4px 12px rgba(0,0,0,.08);
+  line-height:1.7;
+
+}
+
+
+
+.logo-section{
+
+  text-align:center;
+  margin-bottom:25px;
+
+}
+
+
+.logo-section h1{
+
+  color:#6C3EF4;
+  margin:10px 0;
+
+}
+
+
+.logo-section p{
+
+  color:#777;
+
+}
+
+
+
+.about-card h3{
+
+  color:#333;
+  margin-top:25px;
+
+}
+
+
+.about-card p{
+
+  color:#555;
+
+}
+
+
+
+.feature-box{
+
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+  margin-top:20px;
+
+}
+
+
+
+.feature-box div{
+
+  background:#eee7ff;
+  padding:15px;
+  border-radius:15px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+
+}
+
+
+.feature-box span{
+
+  font-size:14px;
+  font-weight:600;
+
+}
+
+
+
+.copyright{
+
+  text-align:center;
+  margin-top:30px;
+  color:#6C3EF4 !important;
+  font-weight:bold;
+
+}

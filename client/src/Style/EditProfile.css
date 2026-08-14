@@ -1,0 +1,674 @@
+/* =====================================================
+   ZENRIXA - EDIT PROFILE
+   Soft Pink + Blue + Purple Theme
+===================================================== */
+
+.edit-profile {
+  min-height: 100vh;
+
+  background:
+    radial-gradient(
+      circle at 8% 8%,
+      rgba(255, 182, 193, 0.28),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 92% 12%,
+      rgba(173, 216, 230, 0.30),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 50% 92%,
+      rgba(190, 170, 255, 0.25),
+      transparent 35%
+    ),
+    linear-gradient(
+      135deg,
+      #fff7fa 0%,
+      #f4f9ff 48%,
+      #f8f5ff 100%
+    );
+
+  padding-bottom: 40px;
+  color: #24212d;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.edit-header {
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 14px 20px;
+
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(14px);
+
+  border-bottom: 1px solid rgba(90, 45, 224, 0.08);
+
+  box-shadow:
+    0 4px 18px rgba(35, 25, 70, 0.06);
+
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+
+/* Header Title */
+
+.edit-header h2 {
+  margin: 0;
+
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+
+  color: #24212d;
+}
+
+
+/* Header Subtitle */
+
+.edit-header p {
+  margin: 3px 0 0;
+
+  color: #777184;
+
+  font-size: 13px;
+}
+
+
+/* Back Button */
+
+.edit-header .back-btn {
+  width: 42px;
+  height: 42px;
+
+  border: none;
+  border-radius: 13px;
+
+  background: #f2efff;
+  color: #5a2de0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  transition: 0.25s ease;
+}
+
+
+.edit-header .back-btn:hover {
+  background: #5a2de0;
+  color: #ffffff;
+
+  transform: translateX(-2px);
+}
+
+
+/* =====================================================
+   IMAGE SECTION
+===================================================== */
+
+.edit-image-section {
+  width: min(92%, 650px);
+
+  margin: 30px auto 20px;
+  padding: 28px 20px;
+
+  text-align: center;
+
+  background: rgba(255, 255, 255, 0.92);
+
+  border-radius: 24px;
+
+  box-shadow:
+    0 12px 35px rgba(50, 35, 90, 0.09);
+
+  border: 1px solid rgba(90, 45, 224, 0.07);
+
+  backdrop-filter: blur(10px);
+}
+
+
+/* Image Wrapper */
+
+.edit-image-wrapper {
+  width: 125px;
+  height: 125px;
+
+  margin: 0 auto 15px;
+
+  position: relative;
+}
+
+
+/* Profile Image */
+
+.edit-profile-image {
+  width: 125px;
+  height: 125px;
+
+  object-fit: cover;
+
+  border-radius: 50%;
+
+  border: 5px solid #ffffff;
+
+  box-shadow:
+    0 8px 25px rgba(90, 45, 224, 0.20),
+    0 0 0 3px #e6dfff;
+}
+
+
+/* Camera Button */
+
+.camera-btn {
+  position: absolute;
+
+  right: 0;
+  bottom: 4px;
+
+  width: 42px;
+  height: 42px;
+
+  border: 4px solid #ffffff;
+
+  border-radius: 50%;
+
+  background: #5a2de0;
+  color: #ffffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 5px 15px rgba(90, 45, 224, 0.30);
+
+  transition: 0.25s ease;
+}
+
+
+.camera-btn:hover {
+  transform: scale(1.08);
+
+  background: #4720bd;
+}
+
+
+/* Image Section Title */
+
+.edit-image-section h3 {
+  margin: 5px 0 4px;
+
+  font-size: 17px;
+  font-weight: 800;
+
+  color: #24212d;
+}
+
+
+/* Image Section Description */
+
+.edit-image-section p {
+  margin: 0;
+
+  color: #85808f;
+
+  font-size: 13px;
+}
+
+
+/* =====================================================
+   FORM
+===================================================== */
+
+.edit-form {
+  width: min(92%, 650px);
+
+  margin: 20px auto;
+
+  padding: 25px;
+
+  background: rgba(255, 255, 255, 0.95);
+
+  border-radius: 24px;
+
+  box-shadow:
+    0 12px 35px rgba(50, 35, 90, 0.09);
+
+  border: 1px solid rgba(90, 45, 224, 0.07);
+
+  backdrop-filter: blur(10px);
+}
+
+
+/* Form Group */
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+
+/* Labels */
+
+.form-group label {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  margin-bottom: 8px;
+
+  color: #383241;
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+
+/* Label Icons */
+
+.form-group label svg {
+  color: #5a2de0;
+}
+
+
+/* =====================================================
+   INPUT / SELECT / TEXTAREA
+===================================================== */
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  border: 1px solid #e4e0eb;
+
+  outline: none;
+
+  background: #faf9fc;
+
+  color: #28242f;
+
+  border-radius: 13px;
+
+  padding: 13px 14px;
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  transition: 0.25s ease;
+}
+
+
+/* Input & Select Height */
+
+.form-group input,
+.form-group select {
+  height: 48px;
+}
+
+
+/* Textarea */
+
+.form-group textarea {
+  resize: vertical;
+
+  min-height: 105px;
+
+  line-height: 1.5;
+}
+
+
+/* Focus */
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  background: #ffffff;
+
+  border-color: #5a2de0;
+
+  box-shadow:
+    0 0 0 4px rgba(90, 45, 224, 0.09);
+}
+
+
+/* Placeholder */
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #aaa5b3;
+}
+
+
+/* Disabled */
+
+.form-group input:disabled,
+.form-group select:disabled,
+.form-group textarea:disabled {
+  opacity: 0.65;
+
+  cursor: not-allowed;
+}
+
+
+/* =====================================================
+   SELECT DROPDOWN
+===================================================== */
+
+.form-group select {
+  cursor: pointer;
+}
+
+
+/* =====================================================
+   SAVE BUTTON
+===================================================== */
+
+.save-btn {
+  width: 100%;
+
+  min-height: 52px;
+
+  margin-top: 5px;
+
+  border: none;
+
+  border-radius: 15px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #6b3bea,
+      #5125ce
+    );
+
+  color: #ffffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+
+  font-size: 15px;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 9px 20px rgba(90, 45, 224, 0.25);
+
+  transition: 0.25s ease;
+}
+
+
+/* Save Button Hover */
+
+.save-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 13px 25px rgba(90, 45, 224, 0.30);
+}
+
+
+/* Save Button Active */
+
+.save-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+
+/* Save Button Disabled */
+
+.save-btn:disabled {
+  opacity: 0.65;
+
+  cursor: not-allowed;
+}
+
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+.edit-loading {
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+
+  color: #5a2de0;
+
+  background:
+    radial-gradient(
+      circle at 10% 10%,
+      rgba(255, 182, 193, 0.25),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 90% 15%,
+      rgba(173, 216, 230, 0.25),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 50% 90%,
+      rgba(190, 170, 255, 0.22),
+      transparent 35%
+    ),
+    linear-gradient(
+      135deg,
+      #fff7fa,
+      #f4f9ff,
+      #f8f5ff
+    );
+}
+
+
+.edit-loading p {
+  margin: 0;
+
+  color: #777184;
+
+  font-size: 14px;
+
+  font-weight: 600;
+}
+
+
+/* Loading Icon */
+
+.loading-icon {
+  animation: editSpin 1s linear infinite;
+}
+
+
+/* Loading Animation */
+
+@keyframes editSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* =====================================================
+   SUCCESS / ERROR MESSAGE
+===================================================== */
+
+.edit-message {
+  width: min(92%, 650px);
+
+  margin: 15px auto;
+
+  padding: 12px 16px;
+
+  border-radius: 12px;
+
+  text-align: center;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  box-sizing: border-box;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+  .edit-header {
+    padding: 12px 15px;
+  }
+
+
+  .edit-header h2 {
+    font-size: 19px;
+  }
+
+
+  .edit-header p {
+    font-size: 12px;
+  }
+
+
+  .edit-header .back-btn {
+    width: 40px;
+    height: 40px;
+
+    border-radius: 12px;
+  }
+
+
+  .edit-image-section,
+  .edit-form {
+    width: calc(100% - 30px);
+
+    box-sizing: border-box;
+
+    border-radius: 20px;
+  }
+
+
+  .edit-image-section {
+    margin-top: 20px;
+
+    padding: 24px 15px;
+  }
+
+
+  .edit-form {
+    padding: 20px 16px;
+  }
+
+
+  .edit-image-wrapper {
+    width: 115px;
+    height: 115px;
+  }
+
+
+  .edit-profile-image {
+    width: 115px;
+    height: 115px;
+  }
+
+
+  .camera-btn {
+    width: 40px;
+    height: 40px;
+
+    right: -2px;
+    bottom: 2px;
+  }
+
+
+  .form-group {
+    margin-bottom: 17px;
+  }
+
+
+  .form-group input,
+  .form-group select {
+    height: 46px;
+  }
+
+
+  .save-btn {
+    min-height: 50px;
+
+    border-radius: 14px;
+  }
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 380px) {
+
+  .edit-header {
+    gap: 10px;
+
+    padding: 11px 12px;
+  }
+
+
+  .edit-header h2 {
+    font-size: 17px;
+  }
+
+
+  .edit-header p {
+    font-size: 11px;
+  }
+
+
+  .edit-image-section,
+  .edit-form {
+    width: calc(100% - 20px);
+  }
+
+
+  .edit-form {
+    padding: 18px 13px;
+  }
+
+
+  .edit-profile-image {
+    width: 105px;
+    height: 105px;
+  }
+
+
+  .edit-image-wrapper {
+    width: 105px;
+    height: 105px;
+  }
+}

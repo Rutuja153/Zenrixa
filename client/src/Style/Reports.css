@@ -1,0 +1,1392 @@
+/* =====================================================
+   REPORTS PAGE
+===================================================== */
+
+.reports-page {
+  min-height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 25px;
+  background: #f7f7fb;
+  color: #222;
+}
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.reports-header {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto 25px;
+
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  padding: 18px 20px;
+
+  background: #ffffff;
+
+  border-radius: 18px;
+
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+
+  box-sizing: border-box;
+}
+
+.reports-header svg {
+  flex-shrink: 0;
+  cursor: pointer;
+  color: #5a2de0;
+
+  transition: 0.2s ease;
+}
+
+.reports-header svg:hover {
+  transform: translateX(-3px);
+}
+
+.reports-header h2 {
+  margin: 0;
+
+  font-size: 24px;
+  font-weight: 700;
+
+  color: #222;
+}
+
+.reports-header p {
+  margin: 4px 0 0;
+
+  color: #888;
+  font-size: 13px;
+}
+
+/* =====================================================
+   REPORT LIST
+===================================================== */
+
+.reports-list {
+  width: 100%;
+  max-width: 1000px;
+
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 18px;
+}
+
+/* =====================================================
+   REPORT CARD
+===================================================== */
+
+.report-card {
+  width: 100%;
+  box-sizing: border-box;
+
+  display: flex;
+  gap: 20px;
+
+  padding: 18px;
+
+  background: #ffffff;
+
+  border-radius: 18px;
+
+  border: 1px solid #eeeeee;
+
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.report-card:hover {
+  transform: translateY(-2px);
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* =====================================================
+   IMAGE CONTAINER
+===================================================== */
+
+.report-image-container {
+  width: 170px;
+  height: 170px;
+
+  min-width: 170px;
+
+  overflow: hidden;
+
+  border-radius: 15px;
+
+  background: #f1f1f5;
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.report-image {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  display: block;
+
+  transition: transform 0.3s ease;
+}
+
+.report-card:hover .report-image {
+  transform: scale(1.04);
+}
+
+/* =====================================================
+   IMAGE ERROR
+===================================================== */
+
+.image-error {
+  position: absolute;
+
+  inset: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-direction: column;
+
+  gap: 8px;
+
+  color: #999;
+
+  font-size: 12px;
+
+  background: #f5f5f5;
+}
+
+/* =====================================================
+   DEFAULT REPORT ICON
+===================================================== */
+
+.report-icon {
+  width: 170px;
+  height: 170px;
+
+  min-width: 170px;
+
+  border-radius: 15px;
+
+  background: linear-gradient(
+    135deg,
+    #eee8ff,
+    #f7f4ff
+  );
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  color: #5a2de0;
+}
+
+.report-icon svg {
+  width: 55px;
+  height: 55px;
+}
+
+/* =====================================================
+   REPORT INFORMATION
+===================================================== */
+
+.report-info {
+  flex: 1;
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* =====================================================
+   TITLE ROW
+===================================================== */
+
+.report-title-row {
+  display: flex;
+
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 15px;
+}
+
+.report-title-row h3 {
+  margin: 0;
+
+  font-size: 20px;
+  font-weight: 700;
+
+  color: #222;
+
+  word-break: break-word;
+}
+
+/* =====================================================
+   CATEGORY
+===================================================== */
+
+.report-category {
+  width: fit-content;
+
+  margin-top: 8px;
+
+  padding: 5px 10px;
+
+  border-radius: 20px;
+
+  background: #f0ebff;
+
+  color: #5a2de0;
+
+  font-size: 12px;
+
+  font-weight: 600;
+}
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.report-status {
+  flex-shrink: 0;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 5px;
+
+  padding: 6px 11px;
+
+  border-radius: 20px;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+/* Pending */
+
+.status-pending {
+  color: #9a6b00;
+
+  background: #fff4cc;
+}
+
+/* In Review */
+
+.status-review {
+  color: #2468b1;
+
+  background: #e7f2ff;
+}
+
+/* Resolved */
+
+.status-resolved {
+  color: #228548;
+
+  background: #e5f8ec;
+}
+
+/* =====================================================
+   DESCRIPTION
+===================================================== */
+
+.report-description {
+  margin: 12px 0 8px;
+
+  color: #555;
+
+  font-size: 14px;
+
+  line-height: 1.6;
+
+  /*
+    Full description is displayed.
+    No -webkit-line-clamp warning.
+  */
+
+  word-break: break-word;
+}
+
+/* =====================================================
+   META INFORMATION
+===================================================== */
+
+.report-meta {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  align-items: center;
+
+  gap: 14px;
+
+  margin-top: 4px;
+}
+
+.report-meta span {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 5px;
+
+  color: #777;
+
+  font-size: 12px;
+}
+
+.report-meta svg {
+  color: #5a2de0;
+
+  flex-shrink: 0;
+}
+
+/* =====================================================
+   FILE NAME
+===================================================== */
+
+.report-file-name {
+  max-width: 300px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  margin-top: 9px;
+
+  color: #777;
+
+  font-size: 12px;
+}
+
+.report-file-name svg {
+  flex-shrink: 0;
+
+  color: #5a2de0;
+}
+
+.report-file-name span {
+  overflow: hidden;
+
+  white-space: nowrap;
+
+  text-overflow: ellipsis;
+}
+
+/* =====================================================
+   ACTIONS
+===================================================== */
+
+.report-actions {
+  display: flex;
+
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 18px;
+
+  margin-top: auto;
+
+  padding-top: 14px;
+}
+
+/* =====================================================
+   VIEW BUTTON
+===================================================== */
+
+.view-report-btn {
+  border: none;
+
+  background: transparent;
+
+  color: #5a2de0;
+
+  padding: 0;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.view-report-btn:hover {
+  color: #4520b5;
+
+  text-decoration: underline;
+}
+
+/* =====================================================
+   DELETE BUTTON
+===================================================== */
+
+.delete-report-btn {
+  border: none;
+
+  background: transparent;
+
+  color: #d64545;
+
+  padding: 0;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.delete-report-btn:hover {
+  color: #b42323;
+
+  text-decoration: underline;
+}
+
+.delete-report-btn:disabled {
+  opacity: 0.6;
+
+  cursor: not-allowed;
+}
+
+/* =====================================================
+   DELETE LOADER
+===================================================== */
+
+.delete-loader {
+  animation: delete-spin 1s linear infinite;
+}
+
+@keyframes delete-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =====================================================
+   EMPTY REPORT
+===================================================== */
+
+.empty-report {
+  width: 100%;
+  max-width: 550px;
+
+  margin: 80px auto;
+
+  padding: 45px 25px;
+
+  box-sizing: border-box;
+
+  text-align: center;
+
+  background: #ffffff;
+
+  border-radius: 20px;
+
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.empty-report-icon {
+  width: 90px;
+  height: 90px;
+
+  margin: 0 auto 20px;
+
+  border-radius: 50%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  background: #f0ebff;
+
+  color: #5a2de0;
+}
+
+.empty-report h3 {
+  margin: 0 0 8px;
+
+  font-size: 20px;
+
+  color: #222;
+}
+
+.empty-report p {
+  margin: 0 0 22px;
+
+  color: #888;
+
+  font-size: 14px;
+}
+
+.empty-report button {
+  border: none;
+
+  padding: 12px 20px;
+
+  border-radius: 10px;
+
+  background: #5a2de0;
+
+  color: #ffffff;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.empty-report button:hover {
+  background: #4820c2;
+}
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+.reports-loading {
+  width: 100%;
+  max-width: 500px;
+
+  margin: 100px auto;
+
+  padding: 40px;
+
+  box-sizing: border-box;
+
+  text-align: center;
+
+  background: #ffffff;
+
+  border-radius: 18px;
+
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.reports-loader {
+  color: #5a2de0;
+
+  animation: reports-spin 1s linear infinite;
+}
+
+@keyframes reports-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.reports-loading h3 {
+  margin: 18px 0 7px;
+
+  color: #222;
+}
+
+.reports-loading p {
+  margin: 0;
+
+  color: #888;
+
+  font-size: 14px;
+}
+
+/* =====================================================
+   ERROR
+===================================================== */
+
+.reports-error {
+  width: 100%;
+  max-width: 500px;
+
+  margin: 100px auto;
+
+  padding: 40px;
+
+  box-sizing: border-box;
+
+  text-align: center;
+
+  background: #ffffff;
+
+  border-radius: 18px;
+
+  color: #d64545;
+
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.reports-error h3 {
+  color: #222;
+
+  margin: 15px 0 8px;
+}
+
+.reports-error p {
+  color: #777;
+
+  font-size: 14px;
+
+  line-height: 1.5;
+}
+
+.reports-error button {
+  margin-top: 10px;
+
+  border: none;
+
+  padding: 11px 20px;
+
+  border-radius: 9px;
+
+  background: #5a2de0;
+
+  color: #ffffff;
+
+  cursor: pointer;
+}
+
+.reports-error button:hover {
+  background: #4820c2;
+}
+
+/* =====================================================
+   MODAL OVERLAY
+===================================================== */
+
+.report-modal-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 9999;
+
+  padding: 20px;
+
+  box-sizing: border-box;
+
+  background: rgba(0, 0, 0, 0.55);
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  overflow-y: auto;
+}
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+.report-modal {
+  width: 100%;
+
+  max-width: 650px;
+
+  max-height: 90vh;
+
+  overflow-y: auto;
+
+  box-sizing: border-box;
+
+  padding: 25px;
+
+  border-radius: 20px;
+
+  background: #ffffff;
+
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+
+  animation: modal-open 0.2s ease;
+}
+
+@keyframes modal-open {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(15px)
+      scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+/* =====================================================
+   MODAL HEADER
+===================================================== */
+
+.modal-header {
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+
+  gap: 15px;
+}
+
+.modal-header > div {
+  min-width: 0;
+}
+
+.modal-header > div > span {
+  color: #888;
+
+  font-size: 12px;
+}
+
+.modal-header h2 {
+  margin: 5px 0 0;
+
+  font-size: 23px;
+
+  color: #222;
+
+  word-break: break-word;
+}
+
+/* =====================================================
+   CLOSE MODAL
+===================================================== */
+
+.close-modal {
+  width: 38px;
+  height: 38px;
+
+  min-width: 38px;
+
+  border: none;
+
+  border-radius: 50%;
+
+  background: #f3f3f5;
+
+  color: #555;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+}
+
+.close-modal:hover {
+  background: #e8e8eb;
+}
+
+/* =====================================================
+   MODAL STATUS
+===================================================== */
+
+.modal-status-row {
+  display: flex;
+
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 10px;
+
+  margin-top: 18px;
+}
+
+.modal-category {
+  padding: 6px 10px;
+
+  border-radius: 20px;
+
+  background: #f0ebff;
+
+  color: #5a2de0;
+
+  font-size: 12px;
+
+  font-weight: 600;
+}
+
+/* =====================================================
+   DETAIL SECTION
+===================================================== */
+
+.detail-section {
+  margin-top: 22px;
+
+  padding: 16px;
+
+  border-radius: 13px;
+
+  background: #f8f8fa;
+}
+
+.detail-section h4 {
+  margin: 0 0 8px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  color: #333;
+
+  font-size: 14px;
+}
+
+.detail-section p {
+  margin: 0;
+
+  color: #555;
+
+  font-size: 14px;
+
+  line-height: 1.6;
+
+  white-space: pre-wrap;
+
+  word-break: break-word;
+}
+
+/* =====================================================
+   DETAIL GRID
+===================================================== */
+
+.detail-grid {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 12px;
+
+  margin-top: 14px;
+}
+
+.detail-item {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 14px;
+
+  border-radius: 12px;
+
+  background: #f8f8fa;
+}
+
+.detail-item svg {
+  flex-shrink: 0;
+
+  color: #5a2de0;
+}
+
+.detail-item div {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 4px;
+
+  min-width: 0;
+}
+
+.detail-item span {
+  color: #888;
+
+  font-size: 11px;
+}
+
+.detail-item strong {
+  color: #333;
+
+  font-size: 13px;
+
+  word-break: break-word;
+}
+
+/* =====================================================
+   COORDINATES
+===================================================== */
+
+.coordinates {
+  line-height: 1.8 !important;
+}
+
+/* =====================================================
+   MAP LINK
+===================================================== */
+
+.map-link {
+  margin-top: 12px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  color: #5a2de0;
+
+  text-decoration: none;
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+.map-link:hover {
+  text-decoration: underline;
+}
+
+/* =====================================================
+   NO LOCATION
+===================================================== */
+
+.no-location {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  color: #888;
+
+  font-size: 13px;
+}
+
+/* =====================================================
+   MODAL IMAGE
+===================================================== */
+
+.modal-report-image {
+  width: 100%;
+
+  max-height: 400px;
+
+  object-fit: contain;
+
+  display: block;
+
+  margin-top: 10px;
+
+  border-radius: 12px;
+
+  background: #eeeeee;
+}
+
+/* =====================================================
+   PDF FILE
+===================================================== */
+
+.pdf-file {
+  margin-top: 10px;
+
+  padding: 18px;
+
+  border-radius: 12px;
+
+  background: #ffffff;
+
+  border: 1px solid #eeeeee;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  color: #5a2de0;
+}
+
+.pdf-file span {
+  color: #444;
+
+  font-size: 13px;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+/* =====================================================
+   ATTACHMENT LINK
+===================================================== */
+
+.attachment-link {
+  margin-top: 12px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  color: #5a2de0;
+
+  text-decoration: none;
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+.attachment-link:hover {
+  text-decoration: underline;
+}
+
+/* =====================================================
+   MODAL ACTIONS
+===================================================== */
+
+.modal-actions {
+  display: flex;
+
+  gap: 10px;
+
+  margin-top: 22px;
+}
+
+/* =====================================================
+   MODAL DELETE
+===================================================== */
+
+.modal-delete-btn {
+  flex: 1;
+
+  padding: 13px;
+
+  border: 1px solid #e5b4b4;
+
+  border-radius: 11px;
+
+  background: #fff4f4;
+
+  color: #d64545;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  transition: 0.2s ease;
+}
+
+.modal-delete-btn:hover {
+  background: #ffe7e7;
+
+  border-color: #d64545;
+}
+
+.modal-delete-btn:disabled {
+  opacity: 0.6;
+
+  cursor: not-allowed;
+}
+
+/* =====================================================
+   MODAL CLOSE BUTTON
+===================================================== */
+
+.modal-close-btn {
+  flex: 1;
+
+  padding: 13px;
+
+  border: none;
+
+  border-radius: 11px;
+
+  background: #5a2de0;
+
+  color: #ffffff;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.modal-close-btn:hover {
+  background: #4820c2;
+}
+
+/* =====================================================
+   SCROLLBAR
+===================================================== */
+
+.report-modal::-webkit-scrollbar {
+  width: 6px;
+}
+
+.report-modal::-webkit-scrollbar-track {
+  background: #f1f1f1;
+
+  border-radius: 10px;
+}
+
+.report-modal::-webkit-scrollbar-thumb {
+  background: #c9c9c9;
+
+  border-radius: 10px;
+}
+
+.report-modal::-webkit-scrollbar-thumb:hover {
+  background: #aaa;
+}
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 800px) {
+  .reports-page {
+    padding: 18px;
+  }
+
+  .report-card {
+    gap: 15px;
+  }
+
+  .report-image-container,
+  .report-icon {
+    width: 145px;
+    height: 145px;
+
+    min-width: 145px;
+  }
+
+  .report-title-row h3 {
+    font-size: 18px;
+  }
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+  .reports-page {
+    padding: 15px;
+  }
+
+  .reports-header {
+    margin-bottom: 18px;
+  }
+
+  .report-card {
+    flex-direction: column;
+
+    padding: 15px;
+  }
+
+  .report-image-container,
+  .report-icon {
+    width: 100%;
+
+    height: 210px;
+
+    min-width: 100%;
+  }
+
+  .report-title-row {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 8px;
+  }
+
+  .report-status {
+    align-self: flex-start;
+  }
+
+  .report-actions {
+    margin-top: 5px;
+  }
+
+  .report-file-name {
+    max-width: 100%;
+  }
+}
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 500px) {
+  .reports-page {
+    padding: 10px;
+  }
+
+  .reports-header {
+    padding: 15px;
+
+    border-radius: 14px;
+  }
+
+  .reports-header h2 {
+    font-size: 20px;
+  }
+
+  .report-card {
+    padding: 13px;
+
+    border-radius: 15px;
+  }
+
+  .report-image-container,
+  .report-icon {
+    height: 180px;
+  }
+
+  .report-title-row h3 {
+    font-size: 18px;
+  }
+
+  .report-description {
+    font-size: 13px;
+  }
+
+  .report-actions {
+    gap: 14px;
+  }
+
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .report-modal-overlay {
+    padding: 10px;
+  }
+
+  .report-modal {
+    padding: 18px;
+
+    border-radius: 16px;
+
+    max-height: 94vh;
+  }
+
+  .modal-header h2 {
+    font-size: 19px;
+  }
+
+  .modal-actions {
+    flex-direction: column;
+  }
+
+  .modal-delete-btn,
+  .modal-close-btn {
+    width: 100%;
+  }
+}
+
+/* =====================================================
+   VERY SMALL MOBILE
+===================================================== */
+
+@media (max-width: 360px) {
+  .reports-header h2 {
+    font-size: 18px;
+  }
+
+  .report-card {
+    padding: 11px;
+  }
+
+  .report-image-container,
+  .report-icon {
+    height: 160px;
+  }
+
+  .report-actions {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 10px;
+  }
+
+  .report-meta {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 7px;
+  }
+}

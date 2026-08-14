@@ -1,0 +1,159 @@
+/* =====================================================
+   EXTRA RESPONSIVE SAFETY
+===================================================== */
+
+.signup-page img {
+  max-width: 100%;
+}
+
+.signup-page button {
+  font-family: inherit;
+}
+
+.signup-page input {
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.signup-page button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+
+/* =====================================================
+   AUTOFILL FIX
+===================================================== */
+
+.signup-page .form-card > input:-webkit-autofill,
+.signup-page .form-card > input:-webkit-autofill:hover,
+.signup-page .form-card > input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #292532;
+
+  -webkit-box-shadow:
+    0 0 0 1000px #ffffff inset;
+
+  transition:
+    background-color 9999s ease-in-out 0s;
+}
+
+
+/* =====================================================
+   INVALID INPUT
+===================================================== */
+
+.signup-page .form-card > input:invalid:not(:placeholder-shown) {
+  border-color: #e4a0b2;
+}
+
+.signup-page .form-card > input:invalid:not(:placeholder-shown):focus {
+  border-color: #e91e63;
+
+  box-shadow:
+    0 0 0 4px rgba(233, 30, 99, 0.08);
+}
+
+
+/* =====================================================
+   TOUCH DEVICES
+===================================================== */
+
+@media (hover: none) {
+
+  .signup-page .otp-btn:hover {
+    transform: none;
+    filter: none;
+  }
+
+  .signup-page .social-login button:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+}
+
+
+/* =====================================================
+   LANDSCAPE MOBILE
+===================================================== */
+
+@media (max-height: 600px) and (max-width: 800px) {
+
+  .signup-page {
+    padding-top: 10px;
+    padding-bottom: 18px;
+  }
+
+  .signup-page .top-section {
+    min-height: 235px;
+  }
+
+  .signup-page .woman-image {
+    width: 125px;
+    height: 125px;
+  }
+
+  .signup-page .form-card {
+    margin-top: -35px;
+  }
+
+}
+
+
+/* =====================================================
+   VERY LARGE SCREENS
+===================================================== */
+
+@media (min-width: 1400px) {
+
+  .signup-page {
+    padding-top: 45px;
+  }
+
+  .signup-page .top-section {
+    max-width: 1150px;
+  }
+
+  .signup-page .form-card {
+    max-width: 550px;
+  }
+
+}
+
+
+/* =====================================================
+   PRINT
+===================================================== */
+
+@media print {
+
+  .signup-page {
+    background: #ffffff;
+    padding: 0;
+  }
+
+  .signup-page .top-section {
+    background: #ffffff;
+    color: #000000;
+    box-shadow: none;
+    border: 1px solid #ddd;
+  }
+
+  .signup-page .text-section {
+    color: #000000;
+  }
+
+  .signup-page .woman-image,
+  .signup-page .social-login {
+    display: none;
+  }
+
+  .signup-page .form-card {
+    margin-top: 20px;
+    box-shadow: none;
+    border: 1px solid #ddd;
+  }
+
+}

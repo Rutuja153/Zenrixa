@@ -1,0 +1,721 @@
+/* =====================================================
+   ZENRIXA - SUPPORT PAGE
+===================================================== */
+
+.support-page {
+  min-height: 100vh;
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 20px 16px 35px;
+
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(108, 62, 244, 0.12),
+      transparent 30%
+    ),
+    linear-gradient(
+      135deg,
+      #faf8ff 0%,
+      #ffffff 55%,
+      #f4efff 100%
+    );
+
+  font-family: "Poppins", "Segoe UI", Arial, sans-serif;
+
+  color: #302936;
+
+  overflow-x: hidden;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.support-header {
+  width: min(650px, 100%);
+
+  min-height: 58px;
+
+  margin: 0 auto 24px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+}
+
+
+.support-header button {
+  width: 43px;
+  height: 43px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 9px;
+
+  border: none;
+  border-radius: 13px;
+
+  background: #ffffff;
+
+  color: #6c3ef4;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 5px 16px rgba(69, 34, 94, 0.08);
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+.support-header button:hover {
+  transform: translateX(-3px);
+
+  background: #f0eaff;
+
+  color: #5a2de0;
+
+  box-shadow:
+    0 8px 20px rgba(108, 62, 244, 0.12);
+}
+
+
+.support-header h2 {
+  margin: 0;
+
+  color: #4b2169;
+
+  font-size: 24px;
+
+  font-weight: 800;
+}
+
+
+.support-header p {
+  margin: 3px 0 0;
+
+  color: #85808f;
+
+  font-size: 12px;
+}
+
+
+/* =====================================================
+   SUPPORT CONTENT
+===================================================== */
+
+.support-content {
+  width: min(650px, 100%);
+
+  margin: 0 auto;
+}
+
+
+/* =====================================================
+   SUPPORT CARD
+===================================================== */
+
+.support-card {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  gap: 15px;
+
+  box-sizing: border-box;
+
+  margin-bottom: 14px;
+
+  padding: 17px;
+
+  background:
+    rgba(255, 255, 255, 0.96);
+
+  border:
+    1px solid #e8e1f0;
+
+  border-radius: 18px;
+
+  box-shadow:
+    0 7px 22px rgba(55, 35, 85, 0.07);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+
+.support-card:hover {
+  transform: translateY(-3px);
+
+  border-color: #dcd0ec;
+
+  box-shadow:
+    0 12px 28px rgba(55, 35, 85, 0.11);
+}
+
+
+/* =====================================================
+   SUPPORT CARD ICON
+===================================================== */
+
+.support-card > svg {
+  width: 22px;
+  height: 22px;
+
+  flex-shrink: 0;
+
+  padding: 12px;
+
+  box-sizing: content-box;
+
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f0eaff,
+      #f8f3ff
+    );
+
+  color: #6c3ef4;
+
+  box-shadow:
+    0 5px 14px rgba(108, 62, 244, 0.10);
+}
+
+
+.support-card h3 {
+  margin: 0 0 5px;
+
+  color: #332b3b;
+
+  font-size: 15px;
+
+  font-weight: 750;
+}
+
+
+.support-card p {
+  margin: 0;
+
+  color: #777080;
+
+  font-size: 13px;
+
+  line-height: 1.5;
+}
+
+
+/* =====================================================
+   MESSAGE BOX
+===================================================== */
+
+.message-box {
+  box-sizing: border-box;
+
+  margin-top: 22px;
+
+  padding: 21px;
+
+  background:
+    rgba(255, 255, 255, 0.97);
+
+  border:
+    1px solid #e6dcec;
+
+  border-radius: 20px;
+
+  box-shadow:
+    0 10px 30px rgba(64, 31, 89, 0.08);
+}
+
+
+/* =====================================================
+   MESSAGE TITLE
+===================================================== */
+
+.message-box h3 {
+  margin: 0 0 15px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  color: #4b2169;
+
+  font-size: 16px;
+
+  font-weight: 800;
+}
+
+
+.message-box h3 svg {
+  color: #6c3ef4;
+}
+
+
+/* =====================================================
+   TEXTAREA
+===================================================== */
+
+.message-box textarea {
+  width: 100%;
+
+  min-height: 130px;
+
+  box-sizing: border-box;
+
+  padding: 14px;
+
+  border:
+    1.5px solid #e2dce8;
+
+  border-radius: 13px;
+
+  background: #faf9fd;
+
+  color: #302936;
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  line-height: 1.6;
+
+  outline: none;
+
+  resize: vertical;
+
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+.message-box textarea::placeholder {
+  color: #aaa3b1;
+}
+
+
+.message-box textarea:hover {
+  border-color: #d3c8df;
+
+  background: #ffffff;
+}
+
+
+.message-box textarea:focus {
+  background: #ffffff;
+
+  border-color: #6c3ef4;
+
+  box-shadow:
+    0 0 0 4px rgba(108, 62, 244, 0.10);
+}
+
+
+/* =====================================================
+   SEND MESSAGE BUTTON
+===================================================== */
+
+.message-box button {
+  width: 100%;
+
+  min-height: 52px;
+
+  margin-top: 15px;
+
+  padding: 13px 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  border: none;
+
+  border-radius: 13px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #6c3ef4,
+      #5a2de0,
+      #713bd0
+    );
+
+  color: #ffffff;
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  font-weight: 750;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 8px 22px rgba(90, 45, 224, 0.22);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    filter 0.25s ease;
+}
+
+
+.message-box button:hover {
+  transform: translateY(-2px);
+
+  filter: brightness(1.04);
+
+  box-shadow:
+    0 12px 28px rgba(90, 45, 224, 0.30);
+}
+
+
+.message-box button:active {
+  transform: scale(0.98);
+
+  box-shadow:
+    0 6px 15px rgba(90, 45, 224, 0.20);
+}
+
+
+.message-box button:disabled {
+  opacity: 0.6;
+
+  cursor: not-allowed;
+
+  transform: none;
+
+  box-shadow: none;
+}
+
+
+/* =====================================================
+   SUCCESS / STATUS MESSAGE
+===================================================== */
+
+.support-success {
+  margin-top: 12px;
+
+  padding: 11px 14px;
+
+  border-radius: 11px;
+
+  background: #f0fdf4;
+
+  border: 1px solid #bbf7d0;
+
+  color: #15803d;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  text-align: center;
+}
+
+
+.support-error {
+  margin-top: 12px;
+
+  padding: 11px 14px;
+
+  border-radius: 11px;
+
+  background: #fff1f2;
+
+  border: 1px solid #fecdd3;
+
+  color: #be123c;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  text-align: center;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 768px) {
+
+  .support-page {
+    padding: 18px 15px 30px;
+  }
+
+  .support-header h2 {
+    font-size: 22px;
+  }
+
+  .support-card {
+    padding: 15px;
+  }
+
+  .message-box {
+    padding: 19px;
+  }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+  .support-page {
+    min-height: 100svh;
+
+    padding:
+      15px
+      13px
+      25px;
+  }
+
+
+  .support-header {
+    min-height: 52px;
+
+    gap: 11px;
+
+    margin-bottom: 18px;
+  }
+
+
+  .support-header button {
+    width: 40px;
+    height: 40px;
+
+    padding: 8px;
+
+    border-radius: 12px;
+  }
+
+
+  .support-header h2 {
+    font-size: 21px;
+  }
+
+
+  .support-header p {
+    font-size: 11px;
+  }
+
+
+  .support-card {
+    gap: 11px;
+
+    padding: 13px;
+
+    border-radius: 16px;
+  }
+
+
+  .support-card > svg {
+    width: 19px;
+    height: 19px;
+
+    padding: 10px;
+
+    border-radius: 12px;
+  }
+
+
+  .support-card h3 {
+    font-size: 14px;
+  }
+
+
+  .support-card p {
+    font-size: 12px;
+  }
+
+
+  .message-box {
+    margin-top: 18px;
+
+    padding: 17px;
+
+    border-radius: 18px;
+  }
+
+
+  .message-box h3 {
+    font-size: 15px;
+  }
+
+
+  .message-box textarea {
+    min-height: 120px;
+
+    padding: 12px;
+
+    font-size: 13px;
+  }
+
+
+  .message-box button {
+    min-height: 49px;
+
+    font-size: 13px;
+  }
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 380px) {
+
+  .support-page {
+    padding:
+      12px
+      10px
+      22px;
+  }
+
+
+  .support-header h2 {
+    font-size: 19px;
+  }
+
+
+  .support-card {
+    padding: 12px;
+
+    gap: 9px;
+  }
+
+
+  .support-card > svg {
+    width: 17px;
+    height: 17px;
+
+    padding: 9px;
+  }
+
+
+  .support-card h3 {
+    font-size: 13px;
+  }
+
+
+  .support-card p {
+    font-size: 11px;
+  }
+
+
+  .message-box {
+    padding: 15px;
+  }
+
+
+  .message-box textarea {
+    min-height: 110px;
+
+    font-size: 12px;
+  }
+
+
+  .message-box button {
+    min-height: 47px;
+
+    font-size: 12px;
+  }
+}
+
+
+/* =====================================================
+   FOCUS ACCESSIBILITY
+===================================================== */
+
+.support-page button:focus-visible,
+.support-page textarea:focus-visible,
+.support-page a:focus-visible {
+  outline:
+    3px solid
+    rgba(108, 62, 244, 0.22);
+
+  outline-offset: 2px;
+}
+
+
+/* =====================================================
+   TOUCH DEVICES
+===================================================== */
+
+@media (hover: none) and (pointer: coarse) {
+
+  .support-card:hover {
+    transform: none;
+
+    box-shadow:
+      0 7px 22px rgba(55, 35, 85, 0.07);
+  }
+
+  .support-header button:hover,
+  .message-box button:hover {
+    transform: none;
+  }
+}
+
+
+/* =====================================================
+   SAFE AREA
+===================================================== */
+
+@supports (padding: max(0px)) {
+
+  .support-page {
+    padding-bottom:
+      max(25px, env(safe-area-inset-bottom));
+
+    padding-left:
+      max(13px, env(safe-area-inset-left));
+
+    padding-right:
+      max(13px, env(safe-area-inset-right));
+  }
+}
+
+
+/* =====================================================
+   REDUCED MOTION
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .support-page *,
+  .support-page *::before,
+  .support-page *::after {
+    transition: none !important;
+
+    animation: none !important;
+  }
+}

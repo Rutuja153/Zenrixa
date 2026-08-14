@@ -1,0 +1,881 @@
+/* =====================================================
+   ZENRIXA LOGIN PAGE
+   Soft Pink + Blue + Purple Theme
+===================================================== */
+
+.login-page {
+  min-height: 100vh;
+  width: 100%;
+
+  background:
+    radial-gradient(
+      circle at 8% 8%,
+      rgba(255, 182, 193, 0.30),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 92% 12%,
+      rgba(173, 216, 230, 0.30),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 50% 92%,
+      rgba(190, 170, 255, 0.28),
+      transparent 35%
+    ),
+    linear-gradient(
+      135deg,
+      #fff7fa 0%,
+      #f4f9ff 48%,
+      #f8f5ff 100%
+    );
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 35px 20px 25px;
+
+  box-sizing: border-box;
+  overflow-x: hidden;
+
+  color: #24212d;
+}
+
+
+/* =====================================================
+   TOP SECTION
+===================================================== */
+
+.top-section {
+  width: 100%;
+  max-width: 1050px;
+
+  min-height: 330px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  position: relative;
+
+  padding: 30px 55px;
+
+  border-radius: 32px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #6c3ef4 0%,
+      #7650df 45%,
+      #9b5cc7 100%
+    );
+
+  box-shadow:
+    0 25px 60px rgba(90, 45, 224, 0.22);
+
+  overflow: hidden;
+
+  box-sizing: border-box;
+}
+
+
+/* =====================================================
+   DECORATIVE CIRCLES
+===================================================== */
+
+.top-section::before {
+  content: "";
+
+  position: absolute;
+
+  width: 230px;
+  height: 230px;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.10);
+
+  top: -100px;
+  right: 180px;
+}
+
+
+.top-section::after {
+  content: "";
+
+  position: absolute;
+
+  width: 180px;
+  height: 180px;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.08);
+
+  bottom: -90px;
+  left: -50px;
+}
+
+
+/* =====================================================
+   EXTRA SOFT DECORATION
+===================================================== */
+
+.top-section {
+  isolation: isolate;
+}
+
+
+/* =====================================================
+   TEXT SECTION
+===================================================== */
+
+.text-section {
+  position: relative;
+
+  z-index: 2;
+
+  max-width: 520px;
+
+  color: #ffffff;
+
+  animation: loginText 0.8s ease;
+}
+
+
+.text-section h3 {
+  margin: 0 0 5px;
+
+  font-size: 21px;
+
+  font-weight: 500;
+
+  opacity: 0.92;
+
+  letter-spacing: 0.3px;
+}
+
+
+.text-section h1 {
+  margin: 0;
+
+  font-size: clamp(40px, 6vw, 64px);
+
+  font-weight: 800;
+
+  letter-spacing: -1.5px;
+
+  line-height: 1.05;
+
+  text-shadow:
+    0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+
+.text-section p {
+  margin: 18px 0 0;
+
+  font-size: 16px;
+
+  opacity: 0.9;
+
+  line-height: 1.6;
+}
+
+
+/* =====================================================
+   WOMAN IMAGE
+===================================================== */
+
+.woman-image {
+  position: relative;
+
+  z-index: 2;
+
+  width: 300px;
+  height: 300px;
+
+  object-fit: cover;
+
+  border-radius: 50%;
+
+  border: 7px solid rgba(255, 255, 255, 0.78);
+
+  box-shadow:
+    0 15px 40px rgba(0, 0, 0, 0.25);
+
+  animation: womanFloat 4s ease-in-out infinite;
+}
+
+
+/* =====================================================
+   FORM CARD
+===================================================== */
+
+.form-card {
+  width: min(100%, 520px);
+
+  margin-top: -45px;
+
+  position: relative;
+
+  z-index: 10;
+
+  background: rgba(255, 255, 255, 0.97);
+
+  border-radius: 26px;
+
+  padding: 28px;
+
+  box-sizing: border-box;
+
+  box-shadow:
+    0 20px 55px rgba(45, 25, 90, 0.15);
+
+  border: 1px solid rgba(90, 45, 224, 0.08);
+
+  backdrop-filter: blur(15px);
+
+  animation: cardUp 0.8s ease;
+}
+
+
+/* =====================================================
+   TABS
+===================================================== */
+
+.tabs {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 5px;
+
+  padding: 5px;
+
+  margin-bottom: 25px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #fff0f5,
+      #f0f7ff,
+      #f4efff
+    );
+
+  border-radius: 14px;
+}
+
+
+.tabs button {
+  border: none;
+
+  background: transparent;
+
+  padding: 12px 10px;
+
+  border-radius: 10px;
+
+  color: #777;
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    0.25s ease;
+}
+
+
+.tabs button:hover {
+  color: #5a2de0;
+
+  background: rgba(90, 45, 224, 0.07);
+}
+
+
+.tabs button.active {
+  color: #ffffff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #6c3ef4,
+      #7b4fe1,
+      #9b5cc7
+    );
+
+  box-shadow:
+    0 6px 15px rgba(90, 45, 224, 0.22);
+}
+
+
+/* =====================================================
+   MOBILE INPUT
+===================================================== */
+
+.form-card > input {
+  width: 100%;
+
+  height: 54px;
+
+  padding: 0 17px;
+
+  box-sizing: border-box;
+
+  border: 1.5px solid #e2ddec;
+
+  outline: none;
+
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fffafd,
+      #f9fbff
+    );
+
+  color: #25212e;
+
+  font-size: 15px;
+
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+
+.form-card > input::placeholder {
+  color: #9992a8;
+}
+
+
+.form-card > input:focus {
+  background: #ffffff;
+
+  border-color: #6c3ef4;
+
+  box-shadow:
+    0 0 0 4px rgba(90, 45, 224, 0.10);
+}
+
+
+/* =====================================================
+   LOGIN BUTTON
+===================================================== */
+
+.otp-btn {
+  width: 100%;
+
+  height: 54px;
+
+  margin-top: 15px;
+
+  border: none;
+
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #6c3ef4,
+      #7b4fdc,
+      #9b5cc7
+    );
+
+  color: #ffffff;
+
+  font-size: 16px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.2px;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 10px 22px rgba(90, 45, 224, 0.25);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+.otp-btn:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 14px 28px rgba(90, 45, 224, 0.32);
+}
+
+
+.otp-btn:active {
+  transform: translateY(0);
+
+  box-shadow:
+    0 7px 15px rgba(90, 45, 224, 0.20);
+}
+
+
+/* =====================================================
+   SOCIAL LOGIN
+===================================================== */
+
+.social-login {
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 14px;
+
+  margin-top: 24px;
+
+  position: relative;
+}
+
+
+.social-login::before {
+  content: "Or continue with";
+
+  position: absolute;
+
+  top: -18px;
+
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  padding: 0 12px;
+
+  background: #ffffff;
+
+  color: #999;
+
+  font-size: 12px;
+
+  white-space: nowrap;
+}
+
+
+.social-login::after {
+  content: "";
+
+  position: absolute;
+
+  width: 100%;
+
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #eee,
+      transparent
+    );
+
+  top: -12px;
+
+  left: 0;
+
+  z-index: -1;
+}
+
+
+.social-login button {
+  width: 52px;
+
+  height: 52px;
+
+  border-radius: 14px;
+
+  border: 1px solid #e5e1ed;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff,
+      #fbfaff
+    );
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+
+.social-login button img {
+  width: 24px;
+
+  height: 24px;
+
+  object-fit: contain;
+
+  transition:
+    transform 0.25s ease;
+}
+
+
+.social-login button:hover {
+  transform: translateY(-4px);
+
+  border-color: #d3c7ed;
+
+  box-shadow:
+    0 8px 20px rgba(50, 30, 100, 0.12);
+}
+
+
+.social-login button:hover img {
+  transform: scale(1.1);
+}
+
+
+.social-login button:active {
+  transform: translateY(-1px);
+}
+
+
+/* =====================================================
+   POLICY
+===================================================== */
+
+.policy {
+  margin: 24px 0 0;
+
+  text-align: center;
+
+  color: #9993a5;
+
+  font-size: 11px;
+
+  line-height: 1.7;
+}
+
+
+.policy::first-line {
+  color: #777;
+}
+
+
+/* =====================================================
+   ANIMATIONS
+===================================================== */
+
+@keyframes loginText {
+
+  from {
+    opacity: 0;
+
+    transform: translateX(-30px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateX(0);
+  }
+
+}
+
+
+@keyframes cardUp {
+
+  from {
+    opacity: 0;
+
+    transform: translateY(35px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateY(0);
+  }
+
+}
+
+
+@keyframes womanFloat {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 800px) {
+
+  .login-page {
+    padding: 20px 15px 25px;
+  }
+
+
+  .top-section {
+    min-height: 300px;
+
+    padding: 30px;
+
+    border-radius: 26px;
+  }
+
+
+  .woman-image {
+    width: 220px;
+    height: 220px;
+  }
+
+
+  .text-section h1 {
+    font-size: 45px;
+  }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+  .login-page {
+    min-height: 100vh;
+
+    padding:
+      15px
+      12px
+      25px;
+
+    justify-content: flex-start;
+  }
+
+
+  .top-section {
+    min-height: 285px;
+
+    padding:
+      30px
+      22px
+      110px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    border-radius:
+      24px;
+
+    overflow: hidden;
+  }
+
+
+  .text-section {
+    width: 100%;
+
+    text-align: left;
+  }
+
+
+  .text-section h3 {
+    font-size: 17px;
+  }
+
+
+  .text-section h1 {
+    font-size: 42px;
+
+    letter-spacing: -1px;
+  }
+
+
+  .text-section p {
+    font-size: 14px;
+
+    margin-top: 12px;
+  }
+
+
+  .woman-image {
+    position: absolute;
+
+    width: 145px;
+    height: 145px;
+
+    right: 18px;
+    bottom: -28px;
+
+    border-width: 5px;
+  }
+
+
+  .form-card {
+    width: calc(100% - 8px);
+
+    margin-top: -45px;
+
+    padding:
+      23px
+      18px;
+
+    border-radius: 22px;
+  }
+
+
+  .tabs {
+    margin-bottom: 20px;
+  }
+
+
+  .tabs button {
+    padding: 11px 8px;
+
+    font-size: 14px;
+  }
+
+
+  .form-card > input {
+    height: 52px;
+
+    font-size: 14px;
+  }
+
+
+  .otp-btn {
+    height: 52px;
+
+    font-size: 15px;
+  }
+
+
+  .social-login {
+    gap: 12px;
+
+    margin-top: 23px;
+  }
+
+
+  .social-login button {
+    width: 48px;
+    height: 48px;
+
+    border-radius: 13px;
+  }
+
+
+  .social-login button img {
+    width: 22px;
+    height: 22px;
+  }
+
+
+  .policy {
+    margin-top: 20px;
+
+    font-size: 10px;
+  }
+
+}
+
+
+/* =====================================================
+   VERY SMALL MOBILE
+===================================================== */
+
+@media (max-width: 380px) {
+
+  .top-section {
+    min-height: 265px;
+
+    padding:
+      25px
+      18px
+      95px;
+  }
+
+
+  .text-section h1 {
+    font-size: 36px;
+  }
+
+
+  .text-section h3 {
+    font-size: 15px;
+  }
+
+
+  .text-section p {
+    font-size: 12px;
+  }
+
+
+  .woman-image {
+    width: 125px;
+    height: 125px;
+
+    bottom: -25px;
+  }
+
+
+  .form-card {
+    padding: 20px 15px;
+  }
+
+}
+
+
+/* =====================================================
+   ACCESSIBILITY
+===================================================== */
+
+button:focus-visible,
+input:focus-visible {
+  outline:
+    3px solid rgba(90, 45, 224, 0.25);
+
+  outline-offset: 2px;
+}
+
+
+/* =====================================================
+   REDUCED MOTION
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+
+    transition: none !important;
+  }
+
+}

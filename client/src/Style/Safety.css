@@ -1,0 +1,690 @@
+/* =====================================================
+   ZENRIXA - SAFETY TIPS
+===================================================== */
+
+.safety-page {
+  min-height: 100vh;
+  padding-bottom: 35px;
+
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(142, 68, 173, 0.12),
+      transparent 30%
+    ),
+    linear-gradient(
+      180deg,
+      #faf8ff 0%,
+      #f4f2f8 100%
+    );
+
+  color: #292532;
+
+  font-family:
+    "Inter",
+    "Segoe UI",
+    Arial,
+    sans-serif;
+
+  box-sizing: border-box;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.safety-header {
+  min-height: 68px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+
+  padding: 0 18px;
+
+  box-sizing: border-box;
+
+  background: rgba(255, 255, 255, 0.94);
+
+  backdrop-filter: blur(14px);
+
+  border-bottom: 1px solid #ebe7f0;
+
+  box-shadow:
+    0 4px 18px rgba(40, 30, 70, 0.06);
+
+  position: sticky;
+
+  top: 0;
+
+  z-index: 100;
+}
+
+
+.safety-header h2 {
+  margin: 0;
+
+  font-size: 21px;
+
+  font-weight: 800;
+
+  color: #292532;
+
+  letter-spacing: -0.2px;
+}
+
+
+/* =====================================================
+   BACK BUTTON
+===================================================== */
+
+.back-icon {
+  width: 42px;
+  height: 42px;
+
+  padding: 9px;
+
+  box-sizing: border-box;
+
+  border-radius: 13px;
+
+  background: #f1eaff;
+
+  color: #8e44ad;
+
+  cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+.back-icon:hover {
+  background: #8e44ad;
+
+  color: #ffffff;
+
+  transform: translateX(-3px);
+
+  box-shadow:
+    0 7px 18px rgba(142, 68, 173, 0.22);
+}
+
+
+.back-icon:active {
+  transform: scale(0.94);
+}
+
+
+/* =====================================================
+   BANNER
+===================================================== */
+
+.safety-banner {
+  width: min(92%, 700px);
+
+  margin: 22px auto 20px;
+
+  box-sizing: border-box;
+
+  padding: 23px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 17px;
+
+  border-radius: 23px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(142, 68, 173, 0.12),
+      rgba(90, 45, 224, 0.08)
+    );
+
+  border:
+    1px solid rgba(142, 68, 173, 0.15);
+
+  box-shadow:
+    0 10px 28px rgba(90, 50, 110, 0.08);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+.safety-banner:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 14px 32px rgba(90, 50, 110, 0.11);
+}
+
+
+.safety-banner > svg {
+  flex-shrink: 0;
+
+  padding: 12px;
+
+  width: 45px;
+  height: 45px;
+
+  box-sizing: border-box;
+
+  border-radius: 17px;
+
+  background: #ffffff;
+
+  color: #8e44ad;
+
+  box-shadow:
+    0 7px 17px rgba(90, 40, 120, 0.1);
+}
+
+
+.safety-banner h3 {
+  margin: 0 0 5px;
+
+  font-size: 18px;
+
+  font-weight: 800;
+
+  color: #30263d;
+}
+
+
+.safety-banner p {
+  margin: 0;
+
+  color: #777080;
+
+  font-size: 13px;
+
+  line-height: 1.5;
+}
+
+
+/* =====================================================
+   TIPS LIST
+===================================================== */
+
+.tips-list {
+  width: min(92%, 700px);
+
+  margin: 0 auto;
+
+  box-sizing: border-box;
+}
+
+
+/* =====================================================
+   TIP CARD
+===================================================== */
+
+.tip-card {
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  margin-bottom: 12px;
+
+  padding: 15px;
+
+  box-sizing: border-box;
+
+  background: rgba(255, 255, 255, 0.96);
+
+  border:
+    1px solid #ece8f2;
+
+  border-radius: 17px;
+
+  box-shadow:
+    0 6px 18px rgba(45, 30, 70, 0.06);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease;
+}
+
+
+.tip-card:hover {
+  transform: translateY(-2px);
+
+  background: #ffffff;
+
+  box-shadow:
+    0 10px 25px rgba(45, 30, 70, 0.1);
+
+  border-color: #ddd3ee;
+}
+
+
+.tip-card:active {
+  transform: scale(0.99);
+}
+
+
+/* =====================================================
+   TIP NUMBER
+===================================================== */
+
+.tip-number {
+  width: 38px;
+  height: 38px;
+
+  flex-shrink: 0;
+
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #8e44ad,
+      #6e2d91
+    );
+
+  color: #ffffff;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 14px;
+
+  font-weight: 800;
+
+  box-shadow:
+    0 6px 13px rgba(142, 68, 173, 0.2);
+}
+
+
+/* =====================================================
+   TIP TEXT
+===================================================== */
+
+.tip-card p {
+  margin: 0;
+
+  color: #45404d;
+
+  font-size: 13px;
+
+  line-height: 1.55;
+
+  font-weight: 600;
+}
+
+
+/* =====================================================
+   ACTION BUTTONS
+===================================================== */
+
+.action-buttons {
+  width: min(92%, 700px);
+
+  margin: 22px auto 0;
+
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: 12px;
+
+  box-sizing: border-box;
+}
+
+
+.action-buttons button {
+  min-height: 53px;
+
+  border: none;
+
+  border-radius: 15px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  padding: 10px 15px;
+
+  box-sizing: border-box;
+
+  font-size: 13px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    opacity 0.25s ease;
+}
+
+
+.action-buttons button:first-child {
+  background:
+    linear-gradient(
+      135deg,
+      #d93a3a,
+      #b92424
+    );
+
+  color: #ffffff;
+
+  box-shadow:
+    0 8px 20px rgba(190, 35, 35, 0.2);
+}
+
+
+.action-buttons button:last-child {
+  background:
+    linear-gradient(
+      135deg,
+      #6a3ae8,
+      #5125cb
+    );
+
+  color: #ffffff;
+
+  box-shadow:
+    0 8px 20px rgba(90, 45, 224, 0.2);
+}
+
+
+.action-buttons button:hover {
+  transform: translateY(-2px);
+}
+
+
+.action-buttons button:active {
+  transform: scale(0.97);
+}
+
+
+.action-buttons button:disabled {
+  opacity: 0.6;
+
+  cursor: not-allowed;
+
+  transform: none;
+
+  box-shadow: none;
+}
+
+
+/* =====================================================
+   ACCESSIBILITY
+===================================================== */
+
+button:focus-visible {
+  outline:
+    3px solid rgba(90, 45, 224, 0.25);
+
+  outline-offset: 2px;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 768px) {
+
+  .safety-header {
+    padding: 0 16px;
+  }
+
+  .safety-banner {
+    width: min(94%, 700px);
+
+    padding: 21px;
+  }
+
+  .tips-list {
+    width: min(94%, 700px);
+  }
+
+  .action-buttons {
+    width: min(94%, 700px);
+  }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+  .safety-page {
+    padding-bottom: 25px;
+  }
+
+
+  .safety-header {
+    min-height: 62px;
+
+    gap: 11px;
+
+    padding: 0 14px;
+  }
+
+
+  .safety-header h2 {
+    font-size: 19px;
+  }
+
+
+  .back-icon {
+    width: 39px;
+    height: 39px;
+
+    padding: 8px;
+
+    border-radius: 12px;
+  }
+
+
+  .safety-banner {
+    width: calc(100% - 28px);
+
+    margin:
+      17px auto
+      16px;
+
+    padding:
+      19px
+      16px;
+
+    gap: 12px;
+
+    border-radius: 19px;
+  }
+
+
+  .safety-banner > svg {
+    width: 41px;
+    height: 41px;
+
+    padding: 10px;
+
+    border-radius: 14px;
+  }
+
+
+  .safety-banner h3 {
+    font-size: 16px;
+  }
+
+
+  .safety-banner p {
+    font-size: 12px;
+  }
+
+
+  .tips-list {
+    width: calc(100% - 28px);
+  }
+
+
+  .tip-card {
+    gap: 11px;
+
+    padding: 13px;
+
+    margin-bottom: 10px;
+
+    border-radius: 15px;
+  }
+
+
+  .tip-number {
+    width: 35px;
+    height: 35px;
+
+    border-radius: 11px;
+
+    font-size: 13px;
+  }
+
+
+  .tip-card p {
+    font-size: 12.5px;
+
+    line-height: 1.5;
+  }
+
+
+  .action-buttons {
+    width: calc(100% - 28px);
+
+    grid-template-columns: 1fr;
+
+    gap: 10px;
+
+    margin-top: 18px;
+  }
+
+
+  .action-buttons button {
+    min-height: 50px;
+
+    border-radius: 14px;
+
+    font-size: 13px;
+  }
+}
+
+
+/* =====================================================
+   VERY SMALL MOBILE
+===================================================== */
+
+@media (max-width: 380px) {
+
+  .safety-header h2 {
+    font-size: 18px;
+  }
+
+
+  .safety-banner {
+    width: calc(100% - 22px);
+
+    padding: 16px 13px;
+  }
+
+
+  .safety-banner > svg {
+    width: 37px;
+    height: 37px;
+
+    padding: 9px;
+  }
+
+
+  .safety-banner h3 {
+    font-size: 15px;
+  }
+
+
+  .safety-banner p {
+    font-size: 11px;
+  }
+
+
+  .tips-list {
+    width: calc(100% - 22px);
+  }
+
+
+  .tip-card {
+    padding: 11px;
+
+    gap: 9px;
+  }
+
+
+  .tip-number {
+    width: 32px;
+    height: 32px;
+
+    border-radius: 10px;
+
+    font-size: 12px;
+  }
+
+
+  .tip-card p {
+    font-size: 12px;
+  }
+
+
+  .action-buttons {
+    width: calc(100% - 22px);
+  }
+
+
+  .action-buttons button {
+    min-height: 47px;
+
+    font-size: 12px;
+  }
+}
+
+
+/* =====================================================
+   REDUCED MOTION
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+
+    transition: none !important;
+  }
+
+}

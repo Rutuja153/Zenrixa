@@ -1,0 +1,554 @@
+/* =====================================================
+   ZENRIXA - SUPPORT PAGE
+===================================================== */
+
+.support-page {
+  min-height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 20px 16px 35px;
+
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(142, 68, 173, 0.12),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at bottom left,
+      rgba(90, 45, 224, 0.08),
+      transparent 32%
+    ),
+    linear-gradient(
+      180deg,
+      #faf8ff 0%,
+      #ffffff 55%,
+      #f4f1fa 100%
+    );
+
+  color: #292532;
+  font-family: "Poppins", "Segoe UI", sans-serif;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.support-header {
+  width: min(92%, 700px);
+
+  min-height: 58px;
+
+  margin: 0 auto 22px;
+
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+
+.support-header button {
+  width: 42px;
+  height: 42px;
+
+  flex-shrink: 0;
+
+  border: none;
+  border-radius: 13px;
+
+  background: #f1eaff;
+  color: #6c3ef4;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 6px 17px rgba(90, 45, 224, 0.10);
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+.support-header button:hover {
+  transform: translateX(-3px);
+
+  background: #6c3ef4;
+  color: #ffffff;
+
+  box-shadow:
+    0 9px 22px rgba(90, 45, 224, 0.22);
+}
+
+
+.support-header h2 {
+  margin: 0;
+
+  color: #4b2169;
+
+  font-size: 23px;
+  font-weight: 800;
+
+  letter-spacing: 0.2px;
+}
+
+
+/* =====================================================
+   SUPPORT CARDS
+===================================================== */
+
+.support-card {
+  width: min(92%, 700px);
+
+  min-height: 76px;
+
+  box-sizing: border-box;
+
+  margin: 0 auto 13px;
+
+  padding: 16px 18px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 15px;
+
+  background: rgba(255, 255, 255, 0.96);
+
+  border: 1px solid #e8e2f0;
+
+  border-radius: 18px;
+
+  box-shadow:
+    0 7px 21px rgba(45, 30, 70, 0.06);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease;
+}
+
+
+.support-card:hover {
+  transform: translateY(-3px);
+
+  border-color: #d8cbed;
+
+  box-shadow:
+    0 12px 28px rgba(45, 30, 70, 0.10);
+
+  background: #ffffff;
+}
+
+
+/* Support icon */
+
+.support-card > svg {
+  width: 22px;
+  height: 22px;
+
+  flex-shrink: 0;
+
+  padding: 11px;
+
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f0e9ff,
+      #eee4f8
+    );
+
+  color: #6c3ef4;
+
+  box-sizing: content-box;
+}
+
+
+/* Card content */
+
+.support-card h3 {
+  margin: 0 0 5px;
+
+  color: #302936;
+
+  font-size: 15px;
+  font-weight: 800;
+}
+
+
+.support-card p {
+  margin: 0;
+
+  color: #777080;
+
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+
+/* =====================================================
+   MESSAGE BOX
+===================================================== */
+
+.message-box {
+  width: min(92%, 700px);
+
+  box-sizing: border-box;
+
+  margin: 22px auto 0;
+
+  padding: 22px;
+
+  background: rgba(255, 255, 255, 0.97);
+
+  border: 1px solid #e6dcec;
+
+  border-radius: 21px;
+
+  box-shadow:
+    0 10px 30px rgba(64, 31, 89, 0.08);
+
+  backdrop-filter: blur(10px);
+}
+
+
+.message-box h3 {
+  margin: 0 0 17px;
+
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  color: #4b2169;
+
+  font-size: 17px;
+  font-weight: 800;
+}
+
+
+.message-box h3 svg {
+  color: #6c3ef4;
+}
+
+
+/* =====================================================
+   TEXTAREA
+===================================================== */
+
+.message-box textarea {
+  width: 100%;
+  height: 135px;
+
+  box-sizing: border-box;
+
+  padding: 14px 15px;
+
+  resize: vertical;
+
+  border: 1.5px solid #e1dbe8;
+
+  border-radius: 14px;
+
+  outline: none;
+
+  background: #faf9fd;
+
+  color: #302936;
+
+  font-family: inherit;
+
+  font-size: 13px;
+
+  line-height: 1.55;
+
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+
+.message-box textarea::placeholder {
+  color: #a09aaa;
+}
+
+
+.message-box textarea:hover {
+  background: #ffffff;
+  border-color: #cfc5df;
+}
+
+
+.message-box textarea:focus {
+  background: #ffffff;
+
+  border-color: #6c3ef4;
+
+  box-shadow:
+    0 0 0 4px rgba(108, 62, 244, 0.10);
+}
+
+
+/* =====================================================
+   SEND BUTTON
+===================================================== */
+
+.message-box button {
+  width: 100%;
+
+  min-height: 52px;
+
+  margin-top: 15px;
+
+  padding: 13px 18px;
+
+  border: none;
+
+  border-radius: 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #5a2de0,
+      #713bd0,
+      #8e44ad
+    );
+
+  color: #ffffff;
+
+  font-size: 14px;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 9px 23px rgba(90, 45, 224, 0.23);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    filter 0.25s ease;
+}
+
+
+.message-box button:hover {
+  transform: translateY(-2px);
+
+  filter: brightness(1.04);
+
+  box-shadow:
+    0 14px 29px rgba(90, 45, 224, 0.30);
+}
+
+
+.message-box button:active {
+  transform: translateY(0);
+
+  box-shadow:
+    0 7px 15px rgba(90, 45, 224, 0.20);
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 768px) {
+
+  .support-page {
+    padding: 18px 15px 30px;
+  }
+
+  .support-header {
+    width: 94%;
+  }
+
+  .support-card,
+  .message-box {
+    width: 94%;
+  }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+  .support-page {
+    padding: 15px 12px 28px;
+  }
+
+
+  .support-header {
+    width: 100%;
+    margin-bottom: 18px;
+  }
+
+
+  .support-header h2 {
+    font-size: 21px;
+  }
+
+
+  .support-header button {
+    width: 40px;
+    height: 40px;
+  }
+
+
+  .support-card {
+    width: 100%;
+
+    min-height: 70px;
+
+    padding: 14px;
+
+    gap: 12px;
+
+    border-radius: 16px;
+  }
+
+
+  .support-card > svg {
+    width: 19px;
+    height: 19px;
+
+    padding: 9px;
+  }
+
+
+  .support-card h3 {
+    font-size: 14px;
+  }
+
+
+  .support-card p {
+    font-size: 11.5px;
+  }
+
+
+  .message-box {
+    width: 100%;
+
+    margin-top: 20px;
+
+    padding: 18px;
+
+    border-radius: 19px;
+  }
+
+
+  .message-box h3 {
+    font-size: 16px;
+  }
+
+
+  .message-box textarea {
+    height: 125px;
+
+    font-size: 12.5px;
+  }
+
+
+  .message-box button {
+    min-height: 50px;
+
+    font-size: 13px;
+  }
+
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 380px) {
+
+  .support-page {
+    padding: 12px 10px 25px;
+  }
+
+
+  .support-header h2 {
+    font-size: 19px;
+  }
+
+
+  .support-card {
+    padding: 12px;
+
+    gap: 10px;
+  }
+
+
+  .support-card h3 {
+    font-size: 13px;
+  }
+
+
+  .support-card p {
+    font-size: 11px;
+  }
+
+
+  .message-box {
+    padding: 16px;
+  }
+
+
+  .message-box textarea {
+    height: 115px;
+  }
+
+}
+
+
+/* =====================================================
+   ACCESSIBILITY
+===================================================== */
+
+.support-page button:focus-visible,
+.support-page textarea:focus-visible {
+  outline:
+    3px solid rgba(90, 45, 224, 0.22);
+
+  outline-offset: 2px;
+}
+
+
+/* =====================================================
+   REDUCED MOTION
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .support-page *,
+  .support-page *::before,
+  .support-page *::after {
+    animation: none !important;
+
+    transition: none !important;
+  }
+
+}

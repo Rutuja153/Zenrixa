@@ -1,0 +1,618 @@
+
+/* ==========================================
+   ZENRIXA SOS PAGE
+   Main Color: #5A2DE0
+========================================== */
+
+.sos-page {
+  min-height: 100vh;
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 25px 20px 35px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background:
+    radial-gradient(
+      circle at 50% 20%,
+      rgba(90, 45, 224, 0.12),
+      transparent 35%
+    ),
+    linear-gradient(
+      135deg,
+      #faf8ff 0%,
+      #ffffff 55%,
+      #f6f2ff 100%
+    );
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  color: #222;
+}
+
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.sos-header {
+  width: 100%;
+  max-width: 600px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-bottom: 25px;
+}
+
+.sos-icon {
+  color: #5A2DE0;
+
+  padding: 12px;
+
+  border-radius: 50%;
+
+  background: #eee8ff;
+
+  box-shadow:
+    0 8px 22px rgba(90, 45, 224, 0.15);
+}
+
+.sos-header h2 {
+  margin: 12px 0 0;
+
+  color: #292929;
+
+  font-size: 25px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.2px;
+}
+
+
+/* ==========================================
+   MAIN SOS AREA
+========================================== */
+
+.sos-main {
+  width: 100%;
+  max-width: 600px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  text-align: center;
+}
+
+
+/* ==========================================
+   SOS CIRCLE
+========================================== */
+
+.sos-circle {
+  width: 210px;
+  height: 210px;
+
+  box-sizing: border-box;
+
+  border-radius: 50%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  color: white;
+
+  background:
+    linear-gradient(
+      145deg,
+      #e38dab,
+      #ff2d75
+    );
+
+  border: 10px solid rgba(90, 45, 224, 0.12);
+
+  box-shadow:
+    0 0 0 12px rgba(90, 45, 224, 0.05),
+    0 20px 50px rgba(90, 45, 224, 0.28);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.sos-circle svg {
+  margin-bottom: 5px;
+}
+
+.sos-circle h1 {
+  margin: 0;
+
+  font-size: 40px;
+
+  font-weight: 800;
+
+  letter-spacing: 2px;
+}
+
+
+/* ==========================================
+   ACTIVE SOS
+========================================== */
+
+.sos-circle.active {
+  animation: activeSOS 1.7s infinite;
+}
+
+@keyframes activeSOS {
+
+  0% {
+    transform: scale(1);
+
+    box-shadow:
+      0 0 0 10px rgba(90, 45, 224, 0.08),
+      0 20px 50px rgba(90, 45, 224, 0.28);
+  }
+
+  50% {
+    transform: scale(1.04);
+
+    box-shadow:
+      0 0 0 25px rgba(90, 45, 224, 0.04),
+      0 25px 65px rgba(90, 45, 224, 0.38);
+  }
+
+  100% {
+    transform: scale(1);
+
+    box-shadow:
+      0 0 0 10px rgba(90, 45, 224, 0.08),
+      0 20px 50px rgba(90, 45, 224, 0.28);
+  }
+
+}
+
+
+/* ==========================================
+   MESSAGE
+========================================== */
+
+.sos-main > h3 {
+  margin: 25px 0 0;
+
+  color: #333;
+
+  font-size: 18px;
+
+  font-weight: 600;
+}
+
+
+/* ==========================================
+   COUNTDOWN
+========================================== */
+
+.countdown {
+  margin-top: 18px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.countdown span {
+  width: 70px;
+  height: 70px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #ffffff;
+
+  border: 4px solid #5A2DE0;
+
+  color: #5A2DE0;
+
+  font-size: 30px;
+
+  font-weight: 800;
+
+  box-shadow:
+    0 8px 25px rgba(90, 45, 224, 0.16);
+}
+
+.countdown p {
+  margin: 8px 0 0;
+
+  color: #777;
+
+  font-size: 12px;
+}
+
+
+/* ==========================================
+   LOCATION STATUS
+========================================== */
+
+.location-status {
+  margin-top: 18px;
+
+  padding: 11px 18px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  border-radius: 30px;
+
+  color: #5A2DE0;
+
+  background: #eee8ff;
+
+  border: 1px solid #ded3ff;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  box-shadow:
+    0 5px 18px rgba(90, 45, 224, 0.08);
+}
+
+.location-status svg {
+  flex-shrink: 0;
+}
+
+
+/* ==========================================
+   ACTION BUTTONS
+========================================== */
+
+.sos-actions {
+  width: 100%;
+  max-width: 420px;
+
+  margin-top: 30px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 12px;
+}
+
+
+/* ==========================================
+   CALL EMERGENCY BUTTON
+========================================== */
+
+.call-emergency-btn {
+  width: 100%;
+
+  min-height: 52px;
+
+  padding: 14px 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+
+  border: none;
+
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #e91e63,
+      #c2185b
+    );
+
+  color: white;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 8px 22px rgba(233, 30, 99, 0.22);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.call-emergency-btn:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 12px 28px rgba(233, 30, 99, 0.3);
+}
+
+.call-emergency-btn:active {
+  transform: scale(0.97);
+}
+
+
+/* ==========================================
+   CANCEL SOS BUTTON
+========================================== */
+
+.cancel-sos-btn {
+  width: 100%;
+
+  min-height: 52px;
+
+  padding: 14px 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+
+  border: 2px solid #5A2DE0;
+
+  border-radius: 14px;
+
+  background: #ffffff;
+
+  color: #5A2DE0;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    0.25s ease;
+}
+
+.cancel-sos-btn:hover {
+  color: white;
+
+  background: #5A2DE0;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 22px rgba(90, 45, 224, 0.22);
+}
+
+.cancel-sos-btn:active {
+  transform: scale(0.97);
+}
+
+
+/* ==========================================
+   FOOTER MESSAGE
+========================================== */
+
+.sos-footer {
+  max-width: 430px;
+
+  margin: 22px auto 0;
+
+  text-align: center;
+
+  color: #888;
+
+  font-size: 11px;
+
+  line-height: 1.6;
+}
+
+
+/* ==========================================
+   TABLET
+========================================== */
+
+@media (max-width: 768px) {
+
+  .sos-page {
+    padding: 22px 18px 30px;
+  }
+
+  .sos-circle {
+    width: 190px;
+    height: 190px;
+  }
+
+  .sos-circle h1 {
+    font-size: 36px;
+  }
+
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 600px) {
+
+  .sos-page {
+    padding: 18px 15px 25px;
+  }
+
+
+  /* Header */
+
+  .sos-header {
+    margin-bottom: 20px;
+  }
+
+  .sos-icon {
+    width: 30px;
+    height: 30px;
+
+    padding: 10px;
+  }
+
+  .sos-header h2 {
+    font-size: 21px;
+  }
+
+
+  /* SOS circle */
+
+  .sos-circle {
+    width: 175px;
+    height: 175px;
+
+    border-width: 8px;
+  }
+
+  .sos-circle svg {
+    width: 55px;
+    height: 55px;
+  }
+
+  .sos-circle h1 {
+    font-size: 34px;
+  }
+
+
+  /* Message */
+
+  .sos-main > h3 {
+    margin-top: 20px;
+
+    font-size: 15px;
+  }
+
+
+  /* Countdown */
+
+  .countdown {
+    margin-top: 15px;
+  }
+
+  .countdown span {
+    width: 62px;
+    height: 62px;
+
+    font-size: 27px;
+  }
+
+
+  /* Location */
+
+  .location-status {
+    margin-top: 15px;
+
+    padding: 9px 14px;
+
+    font-size: 11px;
+  }
+
+
+  /* Buttons */
+
+  .sos-actions {
+    max-width: 100%;
+
+    margin-top: 25px;
+  }
+
+  .call-emergency-btn,
+  .cancel-sos-btn {
+    min-height: 50px;
+
+    font-size: 13px;
+  }
+
+
+  /* Footer */
+
+  .sos-footer {
+    margin-top: 18px;
+
+    padding: 0 15px;
+
+    font-size: 10px;
+  }
+
+}
+
+
+/* ==========================================
+   SMALL MOBILE
+========================================== */
+
+@media (max-width: 380px) {
+
+  .sos-page {
+    padding-top: 14px;
+  }
+
+  .sos-header {
+    margin-bottom: 15px;
+  }
+
+  .sos-header h2 {
+    font-size: 19px;
+  }
+
+  .sos-circle {
+    width: 155px;
+    height: 155px;
+
+    border-width: 7px;
+  }
+
+  .sos-circle svg {
+    width: 48px;
+    height: 48px;
+  }
+
+  .sos-circle h1 {
+    font-size: 30px;
+  }
+
+  .sos-main > h3 {
+    font-size: 13px;
+  }
+
+  .countdown span {
+    width: 55px;
+    height: 55px;
+
+    font-size: 24px;
+  }
+
+}
+
+
+/* ==========================================
+   REDUCED MOTION
+========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .sos-circle.active {
+    animation: none;
+  }
+
+  .call-emergency-btn,
+  .cancel-sos-btn {
+    transition: none;
+  }
+
+}
