@@ -16,7 +16,7 @@ import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
 
-import "../style/Journey.css";
+import "../Style/Journey.css";
 
 
 function Journey() {
