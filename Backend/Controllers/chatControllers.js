@@ -16,6 +16,7 @@ const chatWithAI = async (req, res) => {
     if (!message || !message.trim()) {
       return res.status(400).json({
         success: false,
+        code: "MESSAGE_REQUIRED",
         message: "Message is required",
       });
     }
@@ -27,38 +28,61 @@ const chatWithAI = async (req, res) => {
     if (!userId) {
       return res.status(400).json({
         success: false,
+        code: "USER_ID_REQUIRED",
         message: "User ID is required",
       });
     }
 
     // =====================================================
-    // CHECK OLLAMA CONFIGURATION
+    // OLLAMA CONFIGURATION
     // =====================================================
 
     const ollamaUrl = process.env.OLLAMA_URL;
     const ollamaModel =
       process.env.OLLAMA_MODEL || "llama3";
+    const ollamaApiKey =
+      process.env.OLLAMA_API_KEY;
 
     if (!ollamaUrl) {
       console.error(
-        "❌ OLLAMA_URL is not configured in environment variables."
+        "❌ OLLAMA_URL is missing"
       );
 
       return res.status(503).json({
         success: false,
         code: "OLLAMA_NOT_CONFIGURED",
         message:
-          "Zenrixa AI is not configured on the server.",
+          "OLLAMA_URL is not configured on the server.",
       });
     }
+
+    if (!ollamaApiKey) {
+      console.error(
+        "❌ OLLAMA_API_KEY is missing"
+      );
+
+      return res.status(503).json({
+        success: false,
+        code: "OLLAMA_API_KEY_MISSING",
+        message:
+          "Ollama API key is not configured on the server.",
+      });
+    }
+
+    // Remove trailing slash
+    const baseUrl = ollamaUrl.replace(/\/+$/, "");
 
     console.log("------------------------------------");
     console.log("🤖 Zenrixa AI Request");
     console.log("User ID:", userId);
     console.log("User Name:", userName);
     console.log("User Message:", message);
-    console.log("Ollama URL:", ollamaUrl);
+    console.log("Ollama URL:", baseUrl);
     console.log("Ollama Model:", ollamaModel);
+    console.log(
+      "Ollama API Key:",
+      ollamaApiKey ? "Present" : "Missing"
+    );
     console.log("------------------------------------");
 
     // =====================================================
@@ -92,7 +116,7 @@ ${message}
 
     try {
       response = await axios.post(
-        `${ollamaUrl}/api/generate`,
+        `${baseUrl}/api/generate`,
         {
           model: ollamaModel,
           prompt: prompt,
@@ -100,31 +124,39 @@ ${message}
         },
         {
           timeout: 120000,
+
           headers: {
             "Content-Type": "application/json",
+
+            // IMPORTANT:
+            // Send Ollama API key
+            Authorization: `Bearer ${ollamaApiKey}`,
           },
         }
       );
+
     } catch (ollamaError) {
-      console.error("❌ Ollama connection failed");
+      console.error(
+        "❌ OLLAMA REQUEST FAILED"
+      );
 
       console.error(
-        "Message:",
+        "Error message:",
         ollamaError.message
       );
 
       console.error(
-        "Code:",
+        "Error code:",
         ollamaError.code
       );
 
       console.error(
-        "Status:",
+        "HTTP status:",
         ollamaError.response?.status
       );
 
       console.error(
-        "Response:",
+        "Ollama response:",
         ollamaError.response?.data
       );
 
@@ -132,81 +164,121 @@ ${message}
       // TIMEOUT
       // ===================================================
 
-      if (ollamaError.code === "ECONNABORTED") {
+      if (
+        ollamaError.code ===
+        "ECONNABORTED"
+      ) {
         return res.status(503).json({
           success: false,
           code: "OLLAMA_TIMEOUT",
           message:
-            "Zenrixa AI is taking too long to respond. Please try again.",
+            "Ollama AI request timed out.",
+          error:
+            ollamaError.message,
         });
       }
 
       // ===================================================
-      // CONNECTION REFUSED / OFFLINE
+      // NETWORK ERROR
       // ===================================================
 
       if (
-        ollamaError.code === "ECONNREFUSED" ||
-        ollamaError.code === "ENOTFOUND" ||
-        ollamaError.code === "ECONNRESET"
+        ollamaError.code ===
+          "ECONNREFUSED" ||
+        ollamaError.code ===
+          "ENOTFOUND" ||
+        ollamaError.code ===
+          "ECONNRESET"
       ) {
         return res.status(503).json({
           success: false,
           code: "OLLAMA_UNAVAILABLE",
           message:
-            "Zenrixa AI is currently unavailable. Please try again later.",
+            "Cannot connect to Ollama.",
+          error:
+            ollamaError.message,
         });
       }
 
       // ===================================================
-      // OLLAMA HTTP ERROR
+      // HTTP ERROR
       // ===================================================
 
       if (ollamaError.response) {
+        const status =
+          ollamaError.response.status;
+
+        const data =
+          ollamaError.response.data;
+
         return res.status(503).json({
           success: false,
-          code: "OLLAMA_ERROR",
+          code: "OLLAMA_HTTP_ERROR",
           message:
-            "Zenrixa AI could not process your request.",
+            `Ollama returned HTTP ${status}.`,
+          error:
+            data?.error ||
+            data?.message ||
+            ollamaError.message,
+          status: status,
         });
       }
 
       // ===================================================
-      // UNKNOWN AI ERROR
+      // UNKNOWN ERROR
       // ===================================================
 
       return res.status(503).json({
         success: false,
         code: "AI_CONNECTION_ERROR",
         message:
-          "Zenrixa AI is temporarily unavailable.",
+          "Ollama request failed.",
+        error:
+          ollamaError.message,
       });
     }
 
     // =====================================================
-    // CHECK OLLAMA RESPONSE
+    // CHECK RESPONSE
     // =====================================================
+
+    console.log(
+      "🤖 Ollama response received:",
+      response?.data
+    );
 
     if (
       !response ||
-      !response.data ||
-      !response.data.response
+      !response.data
     ) {
+      return res.status(503).json({
+        success: false,
+        code: "INVALID_AI_RESPONSE",
+        message:
+          "Ollama returned an empty response.",
+      });
+    }
+
+    // Ollama /api/generate normally returns "response"
+    const aiReply =
+      response.data.response?.trim();
+
+    if (!aiReply) {
       console.error(
-        "❌ Invalid response received from Ollama:",
-        response?.data
+        "❌ No AI response text:",
+        response.data
       );
 
       return res.status(503).json({
         success: false,
         code: "INVALID_AI_RESPONSE",
         message:
-          "Zenrixa AI returned an invalid response.",
+          "Ollama did not return an AI response.",
+        error:
+          response.data.error ||
+          "Empty response received.",
       });
     }
-
-    const aiReply =
-      response.data.response.trim();
 
     console.log(
       "✅ AI Response:",
@@ -214,7 +286,7 @@ ${message}
     );
 
     // =====================================================
-    // SAVE CHAT TO MONGODB
+    // SAVE CHAT
     // =====================================================
 
     try {
@@ -230,10 +302,8 @@ ${message}
       console.log(
         "✅ Chat saved to MongoDB"
       );
-    } catch (databaseError) {
-      // Don't make a successful AI response fail
-      // only because chat history could not be saved.
 
+    } catch (databaseError) {
       console.error(
         "⚠️ Chat save failed:",
         databaseError.message
@@ -241,20 +311,18 @@ ${message}
     }
 
     // =====================================================
-    // SUCCESS RESPONSE
+    // SUCCESS
     // =====================================================
 
     return res.status(200).json({
       success: true,
       reply: aiReply,
       userId: userId,
-      userName: userName || "User",
+      userName:
+        userName || "User",
     });
 
   } catch (error) {
-    // =====================================================
-    // UNEXPECTED ERROR
-    // =====================================================
 
     console.error(
       "❌ Unexpected Chat Controller Error:",
@@ -266,6 +334,7 @@ ${message}
       code: "CHAT_SERVER_ERROR",
       message:
         "Something went wrong while processing your message.",
+      error: error.message,
     });
   }
 };

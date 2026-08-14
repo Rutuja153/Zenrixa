@@ -80,13 +80,17 @@ function Chat() {
     useState(false);
 
 
-  // Microphone state
+  // =====================================================
+  // MICROPHONE STATE
+  // =====================================================
 
   const [listening, setListening] =
     useState(false);
 
 
-  // Speech recognition reference
+  // =====================================================
+  // SPEECH RECOGNITION REFERENCE
+  // =====================================================
 
   const recognitionRef =
     useRef(null);
@@ -104,7 +108,6 @@ function Chat() {
 
 
     // Browser support
-
     if (!SpeechRecognition) {
 
       alert(
@@ -116,7 +119,6 @@ function Chat() {
 
 
     // Stop microphone if already listening
-
     if (
       listening &&
       recognitionRef.current
@@ -135,17 +137,14 @@ function Chat() {
 
 
     // Indian English
-
     recognition.lang = "en-IN";
 
 
     // Stop after one speech
-
     recognition.continuous = false;
 
 
     // Only final result
-
     recognition.interimResults = false;
 
 
@@ -180,7 +179,7 @@ function Chat() {
 
 
         console.log(
-          "Voice:",
+          "🎤 Voice:",
           transcript
         );
 
@@ -227,7 +226,7 @@ function Chat() {
       (event) => {
 
         console.error(
-          "Speech recognition error:",
+          "❌ Speech recognition error:",
           event.error
         );
 
@@ -319,12 +318,10 @@ function Chat() {
 
 
     // Clear input
-
     setInput("");
 
 
     // Start loading
-
     setLoading(true);
 
 
@@ -387,7 +384,6 @@ function Chat() {
           ]
         );
 
-
         return;
       }
 
@@ -397,46 +393,33 @@ function Chat() {
       // =================================================
 
       let errorMessage =
-        "⚠️ Zenrixa AI could not respond. Please try again.";
+        "⚠️ Zenrixa AI could not respond.";
 
 
       if (
-        response.data?.code ===
-        "OLLAMA_NOT_CONFIGURED"
+        response.data?.code
       ) {
 
-        errorMessage =
-          "⚠️ Zenrixa AI is not configured on the server.";
+        errorMessage +=
+          `\n\nCode: ${response.data.code}`;
       }
 
 
       if (
-        response.data?.code ===
-        "OLLAMA_UNAVAILABLE"
+        response.data?.message
       ) {
 
-        errorMessage =
-          "⚠️ Zenrixa AI is currently unavailable. Please try again later.";
+        errorMessage +=
+          `\nMessage: ${response.data.message}`;
       }
 
 
       if (
-        response.data?.code ===
-        "OLLAMA_TIMEOUT"
+        response.data?.error
       ) {
 
-        errorMessage =
-          "⚠️ Zenrixa AI is taking too long to respond. Please try again.";
-      }
-
-
-      if (
-        response.data?.code ===
-        "OLLAMA_ERROR"
-      ) {
-
-        errorMessage =
-          "⚠️ Zenrixa AI could not process your request.";
+        errorMessage +=
+          `\nError: ${response.data.error}`;
       }
 
 
@@ -460,54 +443,56 @@ function Chat() {
 
 
       // =================================================
-      // ERROR MESSAGE
+      // DEFAULT ERROR
       // =================================================
 
       let errorMessage =
-        "⚠️ Unable to connect to Zenrixa AI. Please try again.";
+        "⚠️ Unable to connect to Zenrixa AI.";
 
 
       // =================================================
-      // BACKEND 503
+      // BACKEND RETURNED ERROR
       // =================================================
 
       if (
-        error.response?.status ===
-        503
+        error.response
       ) {
 
-        errorMessage =
-          error.response?.data?.message ||
-          "⚠️ Zenrixa AI is currently unavailable. Please try again later.";
-      }
+        const data =
+          error.response.data;
 
-
-      // =================================================
-      // BACKEND 400
-      // =================================================
-
-      else if (
-        error.response?.status ===
-        400
-      ) {
 
         errorMessage =
-          error.response?.data?.message ||
-          "⚠️ Invalid request.";
-      }
+          `⚠️ Zenrixa AI Error\n\n` +
+          `Status: ${error.response.status}`;
 
 
-      // =================================================
-      // BACKEND 500
-      // =================================================
+        if (
+          data?.code
+        ) {
 
-      else if (
-        error.response?.status ===
-        500
-      ) {
+          errorMessage +=
+            `\nCode: ${data.code}`;
+        }
 
-        errorMessage =
-          "⚠️ Zenrixa server encountered an error. Please try again.";
+
+        if (
+          data?.message
+        ) {
+
+          errorMessage +=
+            `\nMessage: ${data.message}`;
+        }
+
+
+        if (
+          data?.error
+        ) {
+
+          errorMessage +=
+            `\nError: ${data.error}`;
+        }
+
       }
 
 
@@ -521,7 +506,8 @@ function Chat() {
       ) {
 
         errorMessage =
-          "⚠️ Cannot connect to Zenrixa server. Please check your backend deployment.";
+          "⚠️ Cannot connect to Zenrixa backend.\n\n" +
+          "Please check your Render backend deployment.";
       }
 
 
@@ -535,7 +521,23 @@ function Chat() {
       ) {
 
         errorMessage =
-          "⚠️ Zenrixa AI is taking too long to respond. Please try again.";
+          "⚠️ Zenrixa AI request timed out.\n\n" +
+          "The AI service took too long to respond.";
+      }
+
+
+      // =================================================
+      // UNKNOWN ERROR
+      // =================================================
+
+      else {
+
+        errorMessage =
+          `⚠️ Zenrixa AI Error\n\n` +
+          `${
+            error.message ||
+            "Unknown error"
+          }`;
       }
 
 
