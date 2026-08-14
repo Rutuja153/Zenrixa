@@ -2,124 +2,527 @@ import { useEffect, useState } from "react";
 
 import {
   ArrowLeft,
-  FileText,
-  Calendar,
   MapPin,
-  Eye,
+  Clock,
   Trash2,
+  RefreshCw,
+  Plus,
   X,
+  Save,
   Image as ImageIcon,
-  Loader2,
-  AlertCircle,
-  ExternalLink,
 } from "lucide-react";
 
 import { useNavigate } from "react-router-dom";
-
 import axios from "axios";
 
-import { API_URL } from "../config";
+import { API_URL } from "../config.js";
 
-import "../Style/Reports.css";
+import "../Style/Journey.css";
 
 
-function Reports() {
+function Journey() {
+
   const navigate = useNavigate();
 
-  const [reports, setReports] = useState([]);
+  const [journeys, setJourneys] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  const [selectedReport, setSelectedReport] = useState(null);
+  const [showAddForm, setShowAddForm] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [formError, setFormError] = useState("");
 
-  const [deletingId, setDeletingId] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState("");
 
-  const userId = localStorage.getItem("userId");
+  const [formData, setFormData] = useState({
+    place: "",
+    message: "",
+    date: "",
+    time: "",
+  });
 
 
   // =====================================================
-  // IMAGE URL
+  // GET USER ID
   // =====================================================
 
-  const getFileUrl = (fileUrl) => {
-    if (!fileUrl) return "";
+  const getUserId = () => {
 
-    // Already full URL
-    if (
-      fileUrl.startsWith("http://") ||
-      fileUrl.startsWith("https://")
-    ) {
-      return fileUrl;
+    const savedUserId =
+      localStorage.getItem("userId");
+
+    if (savedUserId) {
+      return savedUserId.trim();
     }
 
-    // Remove starting slash
-    const cleanPath = fileUrl.startsWith("/")
-      ? fileUrl.substring(1)
-      : fileUrl;
+    const savedUser =
+      localStorage.getItem("user");
 
-    return `${API_URL}/${cleanPath}`;
+    if (savedUser) {
+
+      try {
+
+        const user = JSON.parse(savedUser);
+
+        return (
+          user.userId ||
+          user._id ||
+          ""
+        )
+          .toString()
+          .trim();
+
+      } catch (error) {
+
+        console.error(
+          "Invalid user:",
+          error
+        );
+
+      }
+    }
+
+    const currentUser =
+      localStorage.getItem(
+        "zenrixaCurrentUser"
+      );
+
+    if (currentUser) {
+
+      try {
+
+        const user =
+          JSON.parse(currentUser);
+
+        return (
+          user.userId ||
+          user._id ||
+          ""
+        )
+          .toString()
+          .trim();
+
+      } catch (error) {
+
+        console.error(
+          "Invalid current user:",
+          error
+        );
+
+      }
+    }
+
+    return "";
   };
 
 
   // =====================================================
-  // LOAD REPORTS
+  // FETCH JOURNEYS
   // =====================================================
 
-  const loadReports = async () => {
-    if (!userId) {
+  const fetchJourneys = async () => {
+
+    try {
+
+      setLoading(true);
+      setError("");
+
+      const userId = getUserId();
+
+      console.log(
+        "Journey userId:",
+        userId
+      );
+
+      console.log(
+        "Journey API:",
+        `${API_URL}/api/journey/${userId}`
+      );
+
+      if (!userId) {
+
+        setJourneys([]);
+
+        setError(
+          "User ID not found. Please login again."
+        );
+
+        return;
+      }
+
+      const response = await axios.get(
+        `${API_URL}/api/journey/${encodeURIComponent(
+          userId
+        )}`
+      );
+
+      console.log(
+        "Journey response:",
+        response.data
+      );
+
+      if (
+        response.data?.success &&
+        Array.isArray(
+          response.data.journeys
+        )
+      ) {
+
+        setJourneys(
+          response.data.journeys
+        );
+
+      } else {
+
+        setJourneys([]);
+
+        setError(
+          response.data?.message ||
+          "No journey history found."
+        );
+      }
+
+    } catch (error) {
+
+      console.error(
+        "Journey fetch error:",
+        error.response?.data ||
+        error.message
+      );
+
+      setJourneys([]);
+
+      setError(
+        error.response?.data?.message ||
+        "Unable to load journey history."
+      );
+
+    } finally {
+
       setLoading(false);
+
+    }
+  };
+
+
+  // =====================================================
+  // INITIAL LOAD
+  // =====================================================
+
+  useEffect(() => {
+
+    fetchJourneys();
+
+  }, []);
+
+
+  // =====================================================
+  // HANDLE INPUT
+  // =====================================================
+
+  const handleChange = (e) => {
+
+    const {
+      name,
+      value,
+    } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+
+  // =====================================================
+  // HANDLE IMAGE
+  // =====================================================
+
+  const handleImageChange = (e) => {
+
+    const file =
+      e.target.files?.[0];
+
+    if (!file) {
+      return;
+    }
+
+    const allowedTypes = [
+      "image/jpeg",
+      "image/jpg",
+      "image/png",
+      "image/webp",
+    ];
+
+    if (
+      !allowedTypes.includes(
+        file.type
+      )
+    ) {
+
+      setFormError(
+        "Please select JPG, PNG or WEBP image."
+      );
+
+      return;
+    }
+
+    if (
+      file.size >
+      5 * 1024 * 1024
+    ) {
+
+      setFormError(
+        "Image size must be less than 5 MB."
+      );
+
+      return;
+    }
+
+    setFormError("");
+    setSelectedImage(file);
+
+    if (imagePreview) {
+      URL.revokeObjectURL(
+        imagePreview
+      );
+    }
+
+    setImagePreview(
+      URL.createObjectURL(file)
+    );
+  };
+
+
+  // =====================================================
+  // OPEN FORM
+  // =====================================================
+
+  const openAddForm = () => {
+
+    setFormData({
+      place: "",
+      message: "",
+      date: "",
+      time: "",
+    });
+
+    setSelectedImage(null);
+    setImagePreview("");
+    setFormError("");
+
+    setShowAddForm(true);
+  };
+
+
+  // =====================================================
+  // CLOSE FORM
+  // =====================================================
+
+  const closeAddForm = () => {
+
+    if (saving) {
+      return;
+    }
+
+    setShowAddForm(false);
+    setSelectedImage(null);
+
+    if (imagePreview) {
+      URL.revokeObjectURL(
+        imagePreview
+      );
+    }
+
+    setImagePreview("");
+    setFormError("");
+  };
+
+
+  // =====================================================
+  // ADD JOURNEY
+  // =====================================================
+
+  const handleAddJourney = async (e) => {
+
+    e.preventDefault();
+
+    setFormError("");
+
+    const userId = getUserId();
+
+    if (!userId) {
+
+      setFormError(
+        "User ID not found. Please login again."
+      );
+
+      return;
+    }
+
+    if (!formData.place.trim()) {
+
+      setFormError(
+        "Please enter journey place."
+      );
+
+      return;
+    }
+
+    if (!formData.date) {
+
+      setFormError(
+        "Please select date."
+      );
+
+      return;
+    }
+
+    if (!formData.time) {
+
+      setFormError(
+        "Please select time."
+      );
+
       return;
     }
 
     try {
-      setLoading(true);
-      setError("");
 
-      const response = await axios.get(
-        `${API_URL}/api/report/user/${userId}`
+      setSaving(true);
+
+      const data =
+        new FormData();
+
+      data.append(
+        "userId",
+        userId
       );
 
-      if (response.data.success) {
-        setReports(response.data.reports || []);
-      } else {
-        setReports([]);
-        setError(
-          response.data.message ||
-            "Unable to load reports."
+      data.append(
+        "place",
+        formData.place.trim()
+      );
+
+      data.append(
+        "message",
+        formData.message.trim()
+      );
+
+      data.append(
+        "date",
+        new Date(
+          `${formData.date}T00:00:00`
+        ).toLocaleDateString(
+          "en-GB",
+          {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+          }
+        )
+      );
+
+      data.append(
+        "time",
+        new Date(
+          `1970-01-01T${formData.time}:00`
+        ).toLocaleTimeString(
+          "en-US",
+          {
+            hour: "numeric",
+            minute: "2-digit",
+          }
+        )
+      );
+
+      data.append(
+        "status",
+        "Completed"
+      );
+
+      if (selectedImage) {
+
+        data.append(
+          "image",
+          selectedImage
         );
       }
 
-    } catch (err) {
-      console.error(
-        "Reports load error:",
-        err
+      console.log(
+        "Adding journey to:",
+        `${API_URL}/api/journey/add`
       );
 
-      setError(
-        err.response?.data?.message ||
-          "Unable to load reports."
+      const response =
+        await axios.post(
+          `${API_URL}/api/journey/add`,
+          data
+        );
+
+      console.log(
+        "Add journey response:",
+        response.data
+      );
+
+      if (
+        response.data?.success
+      ) {
+
+        setShowAddForm(false);
+
+        setFormData({
+          place: "",
+          message: "",
+          date: "",
+          time: "",
+        });
+
+        setSelectedImage(null);
+        setImagePreview("");
+
+        await fetchJourneys();
+
+      } else {
+
+        setFormError(
+          response.data?.message ||
+          "Failed to add journey."
+        );
+      }
+
+    } catch (error) {
+
+      console.error(
+        "Add journey error:",
+        error.response?.data ||
+        error.message
+      );
+
+      setFormError(
+        error.response?.data?.message ||
+        "Unable to add journey."
       );
 
     } finally {
-      setLoading(false);
+
+      setSaving(false);
+
     }
   };
 
 
-  useEffect(() => {
-    loadReports();
-  }, [userId]);
-
-
   // =====================================================
-  // DELETE REPORT
+  // DELETE JOURNEY
   // =====================================================
 
-  const handleDelete = async (reportId) => {
+  const deleteJourney = async (id) => {
 
-    const confirmed = window.confirm(
-      "Are you sure you want to delete this report?"
-    );
+    const confirmed =
+      window.confirm(
+        "Are you sure you want to delete this journey?"
+      );
 
     if (!confirmed) {
       return;
@@ -127,874 +530,546 @@ function Reports() {
 
     try {
 
-      setDeletingId(reportId);
-
-      const response = await axios.delete(
-        `${API_URL}/api/report/${reportId}`,
-        {
-          data: {
-            userId: userId,
-          },
-        }
+      await axios.delete(
+        `${API_URL}/api/journey/${id}`
       );
 
-      if (response.data.success) {
-
-        // Remove report from frontend immediately
-        setReports((previousReports) =>
-          previousReports.filter(
-            (report) =>
-              report._id !== reportId
+      setJourneys(
+        (previous) =>
+          previous.filter(
+            (journey) =>
+              journey._id !== id
           )
-        );
+      );
 
-        // Close modal if deleted from modal
-        if (
-          selectedReport?._id === reportId
-        ) {
-          setSelectedReport(null);
-        }
-
-        alert("Report deleted successfully.");
-
-      } else {
-
-        alert(
-          response.data.message ||
-            "Unable to delete report."
-        );
-
-      }
-
-    } catch (err) {
+    } catch (error) {
 
       console.error(
-        "Delete report error:",
-        err
+        "Delete journey error:",
+        error.response?.data ||
+        error.message
       );
 
       alert(
-        err.response?.data?.message ||
-          "Unable to delete report."
+        error.response?.data?.message ||
+        "Failed to delete journey."
       );
-
-    } finally {
-
-      setDeletingId(null);
-
     }
   };
 
 
   // =====================================================
-  // STATUS CLASS
+  // IMAGE URL
   // =====================================================
 
-  const getStatusClass = (status) => {
+  const getImageUrl = (image) => {
 
-    switch (status) {
-
-      case "Resolved":
-        return "status-resolved";
-
-      case "In Review":
-        return "status-review";
-
-      case "Pending":
-      default:
-        return "status-pending";
-
+    if (!image) {
+      return "";
     }
+
+    if (
+      image.startsWith("http://") ||
+      image.startsWith("https://")
+    ) {
+      return image;
+    }
+
+    return `${API_URL}${image.startsWith("/") ? "" : "/"}${image}`;
   };
 
 
   // =====================================================
-  // FORMAT DATE
-  // =====================================================
-
-  const formatDate = (date) => {
-
-    if (!date) {
-      return "Date unavailable";
-    }
-
-    return new Date(date).toLocaleString(
-      "en-IN",
-      {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-      }
-    );
-  };
-
-
-  // =====================================================
-  // NO LOGIN
-  // =====================================================
-
-  if (!userId) {
-
-    return (
-      <div className="reports-page">
-
-        <div className="reports-header">
-
-          <ArrowLeft
-            onClick={() =>
-              navigate("/profile")
-            }
-          />
-
-          <div>
-            <h2>My Reports</h2>
-            <p>Your submitted reports</p>
-          </div>
-
-        </div>
-
-        <div className="reports-error">
-
-          <AlertCircle size={50} />
-
-          <h3>Please Login</h3>
-
-          <p>
-            Please login to view your
-            submitted reports.
-          </p>
-
-          <button
-            onClick={() =>
-              navigate("/login")
-            }
-          >
-            Login
-          </button>
-
-        </div>
-
-      </div>
-    );
-  }
-
-
-  // =====================================================
-  // LOADING
-  // =====================================================
-
-  if (loading) {
-
-    return (
-      <div className="reports-page">
-
-        <div className="reports-header">
-
-          <ArrowLeft
-            onClick={() =>
-              navigate("/profile")
-            }
-          />
-
-          <div>
-            <h2>My Reports</h2>
-            <p>Your submitted reports</p>
-          </div>
-
-        </div>
-
-        <div className="reports-loading">
-
-          <Loader2
-            size={45}
-            className="reports-loader"
-          />
-
-          <h3>Loading Reports...</h3>
-
-          <p>
-            Please wait while we load
-            your reports.
-          </p>
-
-        </div>
-
-      </div>
-    );
-  }
-
-
-  // =====================================================
-  // ERROR
-  // =====================================================
-
-  if (error) {
-
-    return (
-      <div className="reports-page">
-
-        <div className="reports-header">
-
-          <ArrowLeft
-            onClick={() =>
-              navigate("/profile")
-            }
-          />
-
-          <div>
-            <h2>My Reports</h2>
-            <p>Your submitted reports</p>
-          </div>
-
-        </div>
-
-        <div className="reports-error">
-
-          <AlertCircle size={50} />
-
-          <h3>Unable to Load Reports</h3>
-
-          <p>{error}</p>
-
-          <button
-            onClick={loadReports}
-          >
-            Try Again
-          </button>
-
-        </div>
-
-      </div>
-    );
-  }
-
-
-  // =====================================================
-  // UI
+  // JSX
   // =====================================================
 
   return (
 
-    <div className="reports-page">
+    <div className="journey-page">
 
-      {/* =================================================
-          HEADER
-      ================================================= */}
+      {/* HEADER */}
 
-      <div className="reports-header">
+      <div className="journey-header">
 
-        <ArrowLeft
-          size={24}
+        <button
           onClick={() =>
-            navigate("/profile")
+            navigate(-1)
           }
-        />
+        >
+          <ArrowLeft size={22} />
+        </button>
 
-        <div>
-          <h2>My Reports</h2>
-
-          <p>
-            {reports.length}{" "}
-            {reports.length === 1
-              ? "report"
-              : "reports"}{" "}
-            submitted
-          </p>
-        </div>
+        <h2>
+          Journey History
+        </h2>
 
       </div>
 
 
-      {/* =================================================
-          EMPTY
-      ================================================= */}
+      {/* ACTIONS */}
 
-      {reports.length === 0 ? (
+      {!loading &&
+        !error && (
 
-        <div className="empty-report">
+          <div className="journey-top">
 
-          <div className="empty-report-icon">
-            <FileText size={45} />
-          </div>
+            <div className="journey-count">
 
-          <h3>No Reports Found</h3>
+              {journeys.length}{" "}
 
-          <p>
-            Your submitted reports will
-            appear here.
-          </p>
+              {journeys.length === 1
+                ? "completed trip"
+                : "completed trips"}
 
-          <button
-            onClick={() =>
-              navigate("/report-issue")
-            }
-          >
-            Submit a Report
-          </button>
+            </div>
 
-        </div>
+            <div className="journey-actions">
 
-      ) : (
-
-        <div className="reports-list">
-
-          {reports.map((report) => {
-
-            const fileUrl =
-              getFileUrl(
-                report.fileUrl
-              );
-
-            const isImage =
-              report.fileName &&
-              /\.(jpg|jpeg|png|webp)$/i.test(
-                report.fileName
-              );
-
-            return (
-
-              <div
-                className="report-card"
-                key={report._id}
+              <button
+                className="refresh-btn"
+                onClick={fetchJourneys}
               >
 
-                {/* =================================================
-                    IMAGE
-                ================================================= */}
+                <RefreshCw size={17} />
 
-                {fileUrl && isImage ? (
+                Refresh
 
-                  <div className="report-image-container">
+              </button>
+
+              <button
+                className="add-journey-btn"
+                onClick={openAddForm}
+              >
+
+                <Plus size={18} />
+
+                Add Journey
+
+              </button>
+
+            </div>
+
+          </div>
+        )}
+
+
+      {/* LOADING */}
+
+      {loading && (
+
+        <div className="loading-box">
+
+          <RefreshCw size={30} />
+
+          <p>
+            Loading journeys...
+          </p>
+
+        </div>
+      )}
+
+
+      {/* ERROR */}
+
+      {!loading &&
+        error && (
+
+          <div className="empty-journey">
+
+            <MapPin size={45} />
+
+            <h3>
+              Unable to Load Journeys
+            </h3>
+
+            <p>
+              {error}
+            </p>
+
+            <button
+              className="retry-btn"
+              onClick={fetchJourneys}
+            >
+
+              <RefreshCw size={17} />
+
+              Retry
+
+            </button>
+
+          </div>
+        )}
+
+
+      {/* EMPTY */}
+
+      {!loading &&
+        !error &&
+        journeys.length === 0 && (
+
+          <div className="empty-journey">
+
+            <MapPin size={45} />
+
+            <h3>
+              No Journey History
+            </h3>
+
+            <p>
+              Your completed trips
+              will appear here.
+            </p>
+
+            <button
+              className="add-journey-btn"
+              onClick={openAddForm}
+            >
+
+              <Plus size={18} />
+
+              Add Your First Journey
+
+            </button>
+
+          </div>
+        )}
+
+
+      {/* JOURNEY LIST */}
+
+      {!loading &&
+        !error &&
+        journeys.length > 0 && (
+
+          <div className="journey-list">
+
+            {journeys.map(
+              (journey) => (
+
+                <div
+                  className="journey-card"
+                  key={journey._id}
+                >
+
+                  {journey.image ? (
 
                     <img
-                      src={fileUrl}
-                      alt={report.title}
-                      className="report-image"
+                      className="journey-image"
+                      src={getImageUrl(
+                        journey.image
+                      )}
+                      alt={
+                        journey.place ||
+                        "Journey"
+                      }
                       onError={(e) => {
                         e.currentTarget.style.display =
                           "none";
-
-                        const errorBox =
-                          e.currentTarget
-                            .parentElement
-                            .querySelector(
-                              ".image-error"
-                            );
-
-                        if (errorBox) {
-                          errorBox.style.display =
-                            "flex";
-                        }
                       }}
                     />
 
-                    <div
-                      className="image-error"
-                      style={{
-                        display: "none",
-                      }}
-                    >
-                      <ImageIcon size={35} />
+                  ) : (
 
-                      <span>
-                        Image unavailable
-                      </span>
+                    <div className="journey-image-placeholder">
+
+                      <ImageIcon size={30} />
+
                     </div>
-
-                  </div>
-
-                ) : (
-
-                  <div className="report-icon">
-
-                    <FileText size={55} />
-
-                  </div>
-
-                )}
+                  )}
 
 
-                {/* =================================================
-                    INFORMATION
-                ================================================= */}
+                  <div className="journey-content">
 
-                <div className="report-info">
+                    <div className="journey-route">
 
-                  <div className="report-title-row">
+                      <div className="location">
 
-                    <div>
+                        <MapPin size={21} />
 
-                      <h3>
-                        {report.title}
-                      </h3>
+                        <div>
 
-                      <div className="report-category">
-                        {report.category}
+                          <small>
+                            Journey
+                          </small>
+
+                          <p>
+                            {journey.place}
+                          </p>
+
+                        </div>
+
                       </div>
 
                     </div>
 
-                    <span
-                      className={`report-status ${getStatusClass(
-                        report.status
-                      )}`}
-                    >
-                      {report.status ||
-                        "Pending"}
-                    </span>
 
-                  </div>
+                    {journey.message && (
 
-
-                  {/* DESCRIPTION */}
-
-                  <p className="report-description">
-                    {report.description}
-                  </p>
-
-
-                  {/* META */}
-
-                  <div className="report-meta">
-
-                    <span>
-                      <Calendar
-                        size={14}
-                      />
-
-                      {formatDate(
-                        report.createdAt
-                      )}
-                    </span>
-
-
-                    {report.latitude !== null &&
-                      report.longitude !== null && (
+                      <div className="journey-message">
 
                         <span>
-                          <MapPin
-                            size={14}
-                          />
-
-                          Location
+                          {journey.message}
                         </span>
 
-                      )}
+                      </div>
+                    )}
 
-                  </div>
 
+                    <div className="journey-info">
 
-                  {/* FILE */}
+                      <div>
 
-                  {report.fileName && (
+                        <Clock size={15} />
 
-                    <div className="report-file-name">
+                        <span>
+                          {journey.date}
+                        </span>
 
-                      <FileText
-                        size={15}
-                      />
+                      </div>
 
-                      <span>
-                        {report.fileName}
+                      <div>
+
+                        <Clock size={15} />
+
+                        <span>
+                          {journey.time}
+                        </span>
+
+                      </div>
+
+                      <span className="completed">
+
+                        {journey.status ||
+                          "Completed"}
+
                       </span>
 
                     </div>
 
-                  )}
-
-
-                  {/* ACTIONS */}
-
-                  <div className="report-actions">
-
-                    <button
-                      className="view-report-btn"
-                      onClick={() =>
-                        setSelectedReport(
-                          report
-                        )
-                      }
-                    >
-
-                      <Eye size={16} />
-
-                      View Details
-
-                    </button>
-
-
-                    <button
-                      className="delete-report-btn"
-                      disabled={
-                        deletingId ===
-                        report._id
-                      }
-                      onClick={() =>
-                        handleDelete(
-                          report._id
-                        )
-                      }
-                    >
-
-                      {deletingId ===
-                      report._id ? (
-
-                        <Loader2
-                          size={16}
-                          className="delete-loader"
-                        />
-
-                      ) : (
-
-                        <Trash2
-                          size={16}
-                        />
-
-                      )}
-
-                      {deletingId ===
-                      report._id
-                        ? "Deleting..."
-                        : "Delete"}
-
-                    </button>
-
                   </div>
 
+
+                  <button
+                    className="delete-journey"
+                    onClick={() =>
+                      deleteJourney(
+                        journey._id
+                      )
+                    }
+                    title="Delete journey"
+                  >
+
+                    <Trash2 size={18} />
+
+                  </button>
+
                 </div>
+              )
+            )}
 
-              </div>
-
-            );
-          })}
-
-        </div>
-
-      )}
+          </div>
+        )}
 
 
-      {/* =====================================================
-          DETAILS MODAL
-      ===================================================== */}
+      {/* ADD MODAL */}
 
-      {selectedReport && (
+      {showAddForm && (
 
-        <div
-          className="report-modal-overlay"
-          onClick={() =>
-            setSelectedReport(null)
-          }
-        >
+        <div className="modal-overlay">
 
-          <div
-            className="report-modal"
-            onClick={(e) =>
-              e.stopPropagation()
-            }
-          >
-
-            {/* MODAL HEADER */}
+          <div className="journey-modal">
 
             <div className="modal-header">
 
-              <div>
-
-                <span>
-                  Report Details
-                </span>
-
-                <h2>
-                  {selectedReport.title}
-                </h2>
-
-              </div>
+              <h3>
+                Add Journey
+              </h3>
 
               <button
                 className="close-modal"
-                onClick={() =>
-                  setSelectedReport(null)
-                }
+                onClick={closeAddForm}
               >
-                <X size={20} />
+
+                <X size={19} />
+
               </button>
 
             </div>
 
 
-            {/* STATUS */}
+            {formError && (
 
-            <div className="modal-status-row">
+              <div className="form-error">
 
-              <span
-                className={`report-status ${getStatusClass(
-                  selectedReport.status
-                )}`}
-              >
-                {selectedReport.status ||
-                  "Pending"}
-              </span>
-
-              <span className="modal-category">
-                {selectedReport.category}
-              </span>
-
-            </div>
-
-
-            {/* DESCRIPTION */}
-
-            <div className="detail-section">
-
-              <h4>
-                <FileText size={17} />
-
-                Description
-              </h4>
-
-              <p>
-                {selectedReport.description}
-              </p>
-
-            </div>
-
-
-            {/* DATE + USER */}
-
-            <div className="detail-grid">
-
-              <div className="detail-item">
-
-                <Calendar size={20} />
-
-                <div>
-
-                  <span>
-                    Submitted
-                  </span>
-
-                  <strong>
-                    {formatDate(
-                      selectedReport.createdAt
-                    )}
-                  </strong>
-
-                </div>
+                {formError}
 
               </div>
-
-
-              <div className="detail-item">
-
-                <FileText size={20} />
-
-                <div>
-
-                  <span>
-                    Category
-                  </span>
-
-                  <strong>
-                    {selectedReport.category}
-                  </strong>
-
-                </div>
-
-              </div>
-
-            </div>
-
-
-            {/* LOCATION */}
-
-            <div className="detail-section">
-
-              <h4>
-                <MapPin size={17} />
-
-                Location
-              </h4>
-
-
-              {selectedReport.latitude !==
-                null &&
-              selectedReport.longitude !==
-                null ? (
-
-                <>
-
-                  <p className="coordinates">
-
-                    Latitude:{" "}
-                    {selectedReport.latitude}
-
-                    <br />
-
-                    Longitude:{" "}
-                    {selectedReport.longitude}
-
-                  </p>
-
-
-                  <a
-                    href={`https://www.google.com/maps?q=${selectedReport.latitude},${selectedReport.longitude}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="map-link"
-                  >
-
-                    <ExternalLink
-                      size={15}
-                    />
-
-                    Open in Google Maps
-
-                  </a>
-
-                </>
-
-              ) : (
-
-                <div className="no-location">
-
-                  <MapPin size={16} />
-
-                  Location not available
-
-                </div>
-
-              )}
-
-            </div>
-
-
-            {/* ATTACHMENT */}
-
-            {selectedReport.fileUrl && (
-
-              <div className="detail-section">
-
-                <h4>
-                  <FileText size={17} />
-
-                  Attachment
-                </h4>
-
-
-                {/\.(jpg|jpeg|png|webp)$/i.test(
-                  selectedReport.fileName ||
-                    selectedReport.fileUrl
-                ) ? (
-
-                  <img
-                    src={getFileUrl(
-                      selectedReport.fileUrl
-                    )}
-                    alt={
-                      selectedReport.fileName ||
-                      "Report attachment"
-                    }
-                    className="modal-report-image"
-                  />
-
-                ) : (
-
-                  <div className="pdf-file">
-
-                    <FileText size={35} />
-
-                    <span>
-                      {selectedReport.fileName ||
-                        "Attached file"}
-                    </span>
-
-                  </div>
-
-                )}
-
-
-                <a
-                  href={getFileUrl(
-                    selectedReport.fileUrl
-                  )}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="attachment-link"
-                >
-
-                  <ExternalLink
-                    size={15}
-                  />
-
-                  Open Attachment
-
-                </a>
-
-              </div>
-
             )}
 
 
-            {/* MODAL ACTIONS */}
+            <form
+              onSubmit={handleAddJourney}
+            >
 
-            <div className="modal-actions">
+              <div className="journey-form-group">
+
+                <label>
+                  Journey / Place *
+                </label>
+
+                <input
+                  type="text"
+                  name="place"
+                  placeholder="Example: College to Home"
+                  value={
+                    formData.place
+                  }
+                  onChange={handleChange}
+                />
+
+              </div>
+
+
+              <div className="journey-form-group">
+
+                <label>
+                  Journey Message
+                </label>
+
+                <textarea
+                  name="message"
+                  placeholder="Write something about this journey..."
+                  value={
+                    formData.message
+                  }
+                  onChange={handleChange}
+                  maxLength={500}
+                  rows={4}
+                />
+
+                <small className="message-count">
+
+                  {formData.message.length}
+                  {" / 500"}
+
+                </small>
+
+              </div>
+
+
+              <div className="journey-form-group">
+
+                <label>
+                  Journey Image
+                </label>
+
+                <input
+                  type="file"
+                  accept="image/png,image/jpeg,image/jpg,image/webp"
+                  onChange={handleImageChange}
+                />
+
+                {imagePreview && (
+
+                  <div className="image-preview">
+
+                    <img
+                      src={imagePreview}
+                      alt="Journey preview"
+                    />
+
+                    <button
+                      type="button"
+                      onClick={() => {
+
+                        setSelectedImage(null);
+                        setImagePreview("");
+
+                      }}
+                    >
+
+                      <X size={16} />
+
+                    </button>
+
+                  </div>
+                )}
+
+              </div>
+
+
+              <div className="journey-form-group">
+
+                <label>
+                  Date *
+                </label>
+
+                <input
+                  type="date"
+                  name="date"
+                  value={
+                    formData.date
+                  }
+                  onChange={handleChange}
+                />
+
+              </div>
+
+
+              <div className="journey-form-group">
+
+                <label>
+                  Time *
+                </label>
+
+                <input
+                  type="time"
+                  name="time"
+                  value={
+                    formData.time
+                  }
+                  onChange={handleChange}
+                />
+
+              </div>
+
 
               <button
-                className="modal-delete-btn"
-                disabled={
-                  deletingId ===
-                  selectedReport._id
-                }
-                onClick={() =>
-                  handleDelete(
-                    selectedReport._id
-                  )
-                }
+                type="submit"
+                className="save-journey-btn"
+                disabled={saving}
               >
 
-                {deletingId ===
-                selectedReport._id ? (
+                {saving ? (
 
-                  <Loader2
-                    size={17}
-                    className="delete-loader"
-                  />
+                  <>
+                    <RefreshCw size={18} />
+
+                    Saving...
+
+                  </>
 
                 ) : (
 
-                  <Trash2 size={17} />
+                  <>
+                    <Save size={18} />
 
+                    Save Journey
+
+                  </>
                 )}
 
-                {deletingId ===
-                selectedReport._id
-                  ? "Deleting..."
-                  : "Delete Report"}
-
               </button>
 
-
-              <button
-                className="modal-close-btn"
-                onClick={() =>
-                  setSelectedReport(null)
-                }
-              >
-                Close
-              </button>
-
-            </div>
+            </form>
 
           </div>
 
         </div>
-
       )}
 
     </div>
   );
 }
 
-
-export default Reports;
+export default Journey;

@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import { API_URL } from "../config.js";
+
 import {
   ArrowLeft,
   MapPin,
@@ -18,71 +20,60 @@ import axios from "axios";
 
 import "../Style/Journey.css";
 
-
 function Journey() {
-
   const navigate = useNavigate();
 
   // =====================================================
   // STATE
   // =====================================================
 
-  const [journeys, setJourneys] =
-    useState([]);
+  const [journeys, setJourneys] = useState([]);
 
-  const [loading, setLoading] =
-    useState(true);
+  const [loading, setLoading] = useState(true);
 
-  const [error, setError] =
-    useState("");
+  const [error, setError] = useState("");
 
-  const [showAddForm, setShowAddForm] =
-    useState(false);
+  const [showAddForm, setShowAddForm] = useState(false);
 
-  const [saving, setSaving] =
-    useState(false);
+  const [saving, setSaving] = useState(false);
 
-  const [formError, setFormError] =
-    useState("");
+  const [formError, setFormError] = useState("");
 
-  const [selectedImage, setSelectedImage] =
-    useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
 
-  const [imagePreview, setImagePreview] =
-    useState("");
+  const [imagePreview, setImagePreview] = useState("");
 
-  const [formData, setFormData] =
-    useState({
-      place: "",
-      message: "",
-      date: "",
-      time: "",
-    });
-
+  const [formData, setFormData] = useState({
+    place: "",
+    message: "",
+    date: "",
+    time: "",
+  });
 
   // =====================================================
   // GET USER ID
   // =====================================================
 
   const getUserId = () => {
+    // -----------------------------------------------------
+    // 1. userId
+    // -----------------------------------------------------
 
-    const savedUserId =
-      localStorage.getItem("userId");
+    const savedUserId = localStorage.getItem("userId");
 
     if (savedUserId) {
       return savedUserId.trim();
     }
 
+    // -----------------------------------------------------
+    // 2. user
+    // -----------------------------------------------------
 
-    const savedUser =
-      localStorage.getItem("user");
+    const savedUser = localStorage.getItem("user");
 
     if (savedUser) {
-
       try {
-
-        const user =
-          JSON.parse(savedUser);
+        const user = JSON.parse(savedUser);
 
         return (
           user.userId ||
@@ -93,29 +84,22 @@ function Journey() {
         )
           .toString()
           .trim();
-
       } catch (error) {
-
-        console.error(
-          "Invalid user:",
-          error
-        );
-
+        console.error("Invalid user:", error);
       }
     }
 
+    // -----------------------------------------------------
+    // 3. zenrixaCurrentUser
+    // -----------------------------------------------------
 
-    const currentUser =
-      localStorage.getItem(
-        "zenrixaCurrentUser"
-      );
+    const currentUser = localStorage.getItem(
+      "zenrixaCurrentUser"
+    );
 
     if (currentUser) {
-
       try {
-
-        const user =
-          JSON.parse(currentUser);
+        const user = JSON.parse(currentUser);
 
         return (
           user.userId ||
@@ -126,208 +110,199 @@ function Journey() {
         )
           .toString()
           .trim();
-
       } catch (error) {
-
         console.error(
           "Invalid current user:",
           error
         );
-
       }
     }
 
     return "";
   };
 
-
   // =====================================================
   // FETCH JOURNEYS
   // =====================================================
 
-  const fetchJourneys =
-    async () => {
+  const fetchJourneys = async () => {
+    try {
+      setLoading(true);
+      setError("");
 
-      try {
+      const userId = getUserId();
 
-        setLoading(true);
-        setError("");
+      console.log("Journey userId:", userId);
 
-        const userId =
-          getUserId();
+      // ---------------------------------------------------
+      // Check User ID
+      // ---------------------------------------------------
 
-        console.log(
-          "Journey userId:",
-          userId
-        );
-
-
-        if (!userId) {
-
-          setJourneys([]);
-
-          setError(
-            "User ID not found. Please login again."
-          );
-
-          return;
-        }
-
-
-        const url =
-          `http://localhost:5000/api/journey/${encodeURIComponent(
-            userId
-          )}`;
-
-
-        const response =
-          await axios.get(url);
-
-
-        console.log(
-          "Journey response:",
-          response.data
-        );
-
-
-        if (
-          response.data.success &&
-          Array.isArray(
-            response.data.journeys
-          )
-        ) {
-
-          setJourneys(
-            response.data.journeys
-          );
-
-        } else {
-
-          setJourneys([]);
-
-        }
-
-      } catch (error) {
-
-        console.error(
-          "Journey fetch error:",
-          error.response?.data ||
-            error.message
-        );
-
+      if (!userId) {
         setJourneys([]);
 
         setError(
-          error.response?.data?.message ||
-            "Unable to load journey history."
+          "User ID not found. Please login again."
         );
 
-      } finally {
-
-        setLoading(false);
-
+        return;
       }
-    };
 
+      // ---------------------------------------------------
+      // API URL
+      // ---------------------------------------------------
+
+      const url =
+        `${API_URL}/api/journey/${encodeURIComponent(
+          userId
+        )}`;
+
+      console.log(
+        "Fetching Journey from:",
+        url
+      );
+
+      // ---------------------------------------------------
+      // GET Journey
+      // ---------------------------------------------------
+
+      const response = await axios.get(url);
+
+      console.log(
+        "Journey response:",
+        response.data
+      );
+
+      // ---------------------------------------------------
+      // Success
+      // ---------------------------------------------------
+
+      if (
+        response.data.success &&
+        Array.isArray(response.data.journeys)
+      ) {
+        setJourneys(
+          response.data.journeys
+        );
+      } else {
+        setJourneys([]);
+
+        setError(
+          response.data.message ||
+            "No journey history found."
+        );
+      }
+    } catch (error) {
+      console.error(
+        "Journey fetch error:",
+        error.response?.data ||
+          error.message
+      );
+
+      setJourneys([]);
+
+      setError(
+        error.response?.data?.message ||
+          "Unable to load journey history."
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
 
   // =====================================================
   // INITIAL LOAD
   // =====================================================
 
   useEffect(() => {
-
     fetchJourneys();
-
   }, []);
-
 
   // =====================================================
   // HANDLE INPUT
   // =====================================================
 
-  const handleChange =
-    (e) => {
+  const handleChange = (e) => {
+    const {
+      name,
+      value,
+    } = e.target;
 
-      const {
-        name,
-        value,
-      } = e.target;
-
-      setFormData(
-        (prev) => ({
-          ...prev,
-          [name]: value,
-        })
-      );
-    };
-
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
   // =====================================================
   // HANDLE IMAGE
   // =====================================================
 
-  const handleImageChange =
-    (e) => {
+  const handleImageChange = (e) => {
+    const file =
+      e.target.files?.[0];
 
-      const file =
-        e.target.files?.[0];
+    if (!file) {
+      return;
+    }
 
-      if (!file) {
-        return;
-      }
+    // ---------------------------------------------------
+    // Allowed image types
+    // ---------------------------------------------------
 
+    const allowedTypes = [
+      "image/jpeg",
+      "image/jpg",
+      "image/png",
+      "image/webp",
+    ];
 
-      const allowedTypes = [
-        "image/jpeg",
-        "image/jpg",
-        "image/png",
-        "image/webp",
-      ];
-
-
-      if (
-        !allowedTypes.includes(
-          file.type
-        )
-      ) {
-
-        setFormError(
-          "Please select JPG, PNG or WEBP image."
-        );
-
-        return;
-      }
-
-
-      if (
-        file.size >
-        5 * 1024 * 1024
-      ) {
-
-        setFormError(
-          "Image size must be less than 5 MB."
-        );
-
-        return;
-      }
-
-
-      setFormError("");
-
-      setSelectedImage(file);
-
-      setImagePreview(
-        URL.createObjectURL(file)
+    if (
+      !allowedTypes.includes(
+        file.type
+      )
+    ) {
+      setFormError(
+        "Please select JPG, PNG or WEBP image."
       );
-    };
 
+      return;
+    }
+
+    // ---------------------------------------------------
+    // Image size
+    // ---------------------------------------------------
+
+    if (
+      file.size >
+      5 * 1024 * 1024
+    ) {
+      setFormError(
+        "Image size must be less than 5 MB."
+      );
+
+      return;
+    }
+
+    setFormError("");
+
+    setSelectedImage(file);
+
+    // ---------------------------------------------------
+    // Preview
+    // ---------------------------------------------------
+
+    const previewUrl =
+      URL.createObjectURL(file);
+
+    setImagePreview(previewUrl);
+  };
 
   // =====================================================
-  // OPEN FORM
+  // OPEN ADD FORM
   // =====================================================
 
   const openAddForm = () => {
-
     setFormData({
       place: "",
       message: "",
@@ -344,13 +319,11 @@ function Journey() {
     setShowAddForm(true);
   };
 
-
   // =====================================================
-  // CLOSE FORM
+  // CLOSE ADD FORM
   // =====================================================
 
   const closeAddForm = () => {
-
     if (saving) {
       return;
     }
@@ -364,275 +337,314 @@ function Journey() {
     setFormError("");
   };
 
-
   // =====================================================
   // ADD JOURNEY
   // =====================================================
 
-  const handleAddJourney =
-    async (e) => {
+  const handleAddJourney = async (e) => {
+    e.preventDefault();
 
-      e.preventDefault();
+    setFormError("");
 
-      setFormError("");
+    const userId = getUserId();
 
+    console.log(
+      "Add Journey userId:",
+      userId
+    );
 
-      const userId =
-        getUserId();
+    // ---------------------------------------------------
+    // User ID
+    // ---------------------------------------------------
 
+    if (!userId) {
+      setFormError(
+        "User ID not found. Please login again."
+      );
 
-      if (!userId) {
+      return;
+    }
 
-        setFormError(
-          "User ID not found. Please login again."
+    // ---------------------------------------------------
+    // Place
+    // ---------------------------------------------------
+
+    if (
+      !formData.place.trim()
+    ) {
+      setFormError(
+        "Please enter journey place."
+      );
+
+      return;
+    }
+
+    // ---------------------------------------------------
+    // Date
+    // ---------------------------------------------------
+
+    if (!formData.date) {
+      setFormError(
+        "Please select date."
+      );
+
+      return;
+    }
+
+    // ---------------------------------------------------
+    // Time
+    // ---------------------------------------------------
+
+    if (!formData.time) {
+      setFormError(
+        "Please select time."
+      );
+
+      return;
+    }
+
+    try {
+      setSaving(true);
+
+      // -------------------------------------------------
+      // FormData
+      // -------------------------------------------------
+
+      const data = new FormData();
+
+      data.append(
+        "userId",
+        userId
+      );
+
+      data.append(
+        "place",
+        formData.place.trim()
+      );
+
+      data.append(
+        "message",
+        formData.message.trim()
+      );
+
+      // -------------------------------------------------
+      // Format Date
+      // -------------------------------------------------
+
+      const formattedDate =
+        new Date(
+          formData.date
+        ).toLocaleDateString(
+          "en-GB",
+          {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+          }
         );
 
-        return;
+      data.append(
+        "date",
+        formattedDate
+      );
+
+      // -------------------------------------------------
+      // Format Time
+      // -------------------------------------------------
+
+      const formattedTime =
+        new Date(
+          `1970-01-01T${formData.time}`
+        ).toLocaleTimeString(
+          "en-US",
+          {
+            hour: "numeric",
+            minute: "2-digit",
+          }
+        );
+
+      data.append(
+        "time",
+        formattedTime
+      );
+
+      // -------------------------------------------------
+      // Status
+      // -------------------------------------------------
+
+      data.append(
+        "status",
+        "Completed"
+      );
+
+      // -------------------------------------------------
+      // Image
+      // -------------------------------------------------
+
+      if (selectedImage) {
+        data.append(
+          "image",
+          selectedImage
+        );
       }
 
+      // -------------------------------------------------
+      // POST API
+      // -------------------------------------------------
+
+      const url =
+        `${API_URL}/api/journey/add`;
+
+      console.log(
+        "Adding Journey to:",
+        url
+      );
+
+      const response =
+        await axios.post(
+          url,
+          data,
+          {
+            headers: {
+              "Content-Type":
+                "multipart/form-data",
+            },
+          }
+        );
+
+      console.log(
+        "Add journey:",
+        response.data
+      );
+
+      // -------------------------------------------------
+      // SUCCESS
+      // -------------------------------------------------
 
       if (
-        !formData.place.trim()
+        response.data.success
       ) {
+        setShowAddForm(false);
 
+        setFormData({
+          place: "",
+          message: "",
+          date: "",
+          time: "",
+        });
+
+        setSelectedImage(null);
+
+        setImagePreview("");
+
+        setFormError("");
+
+        // Refresh list
+        await fetchJourneys();
+      } else {
         setFormError(
-          "Please enter journey place."
+          response.data.message ||
+            "Failed to add journey."
         );
-
-        return;
       }
+    } catch (error) {
+      console.error(
+        "Add journey error:",
+        error.response?.data ||
+          error.message
+      );
 
-
-      if (!formData.date) {
-
-        setFormError(
-          "Please select date."
-        );
-
-        return;
-      }
-
-
-      if (!formData.time) {
-
-        setFormError(
-          "Please select time."
-        );
-
-        return;
-      }
-
-
-      try {
-
-        setSaving(true);
-
-
-        const data =
-          new FormData();
-
-
-        data.append(
-          "userId",
-          userId
-        );
-
-
-        data.append(
-          "place",
-          formData.place.trim()
-        );
-
-
-        data.append(
-          "message",
-          formData.message.trim()
-        );
-
-
-        data.append(
-          "date",
-          new Date(
-            formData.date
-          ).toLocaleDateString(
-            "en-GB",
-            {
-              day: "2-digit",
-              month: "short",
-              year: "numeric",
-            }
-          )
-        );
-
-
-        data.append(
-          "time",
-          new Date(
-            `1970-01-01T${formData.time}`
-          ).toLocaleTimeString(
-            "en-US",
-            {
-              hour: "numeric",
-              minute: "2-digit",
-            }
-          )
-        );
-
-
-        data.append(
-          "status",
-          "Completed"
-        );
-
-
-        if (selectedImage) {
-
-          data.append(
-            "image",
-            selectedImage
-          );
-
-        }
-
-
-        const response =
-          await axios.post(
-            "http://localhost:5000/api/journey/add",
-            data,
-            {
-              headers: {
-                "Content-Type":
-                  "multipart/form-data",
-              },
-            }
-          );
-
-
-        console.log(
-          "Add journey:",
-          response.data
-        );
-
-
-        if (
-          response.data.success
-        ) {
-
-          setShowAddForm(false);
-
-          setFormData({
-            place: "",
-            message: "",
-            date: "",
-            time: "",
-          });
-
-          setSelectedImage(null);
-
-          setImagePreview("");
-
-          await fetchJourneys();
-
-        } else {
-
-          setFormError(
-            response.data.message ||
-              "Failed to add journey."
-          );
-
-        }
-
-      } catch (error) {
-
-        console.error(
-          "Add journey error:",
-          error.response?.data ||
-            error.message
-        );
-
-
-        setFormError(
-          error.response?.data?.message ||
-            "Unable to add journey."
-        );
-
-      } finally {
-
-        setSaving(false);
-
-      }
-    };
-
+      setFormError(
+        error.response?.data?.message ||
+          "Unable to add journey."
+      );
+    } finally {
+      setSaving(false);
+    }
+  };
 
   // =====================================================
   // DELETE JOURNEY
   // =====================================================
 
-  const deleteJourney =
-    async (id) => {
+  const deleteJourney = async (id) => {
+    const confirmed =
+      window.confirm(
+        "Are you sure you want to delete this journey?"
+      );
 
-      const confirmed =
-        window.confirm(
-          "Are you sure you want to delete this journey?"
-        );
+    if (!confirmed) {
+      return;
+    }
 
+    try {
+      const url =
+        `${API_URL}/api/journey/${id}`;
 
-      if (!confirmed) {
-        return;
-      }
+      console.log(
+        "Deleting Journey:",
+        url
+      );
 
+      const response =
+        await axios.delete(url);
 
-      try {
+      console.log(
+        "Delete response:",
+        response.data
+      );
 
-        await axios.delete(
-          `http://localhost:5000/api/journey/${id}`
-        );
+      // -------------------------------------------------
+      // Remove from UI
+      // -------------------------------------------------
 
+      setJourneys(
+        (prev) =>
+          prev.filter(
+            (journey) =>
+              journey._id !== id
+          )
+      );
+    } catch (error) {
+      console.error(
+        "Delete error:",
+        error.response?.data ||
+          error.message
+      );
 
-        setJourneys(
-          (prev) =>
-            prev.filter(
-              (journey) =>
-                journey._id !== id
-            )
-        );
-
-      } catch (error) {
-
-        console.error(
-          "Delete error:",
-          error.response?.data ||
-            error.message
-        );
-
-        alert(
-          error.response?.data?.message ||
-            "Failed to delete journey."
-        );
-      }
-    };
-
+      alert(
+        error.response?.data?.message ||
+          "Failed to delete journey."
+      );
+    }
+  };
 
   // =====================================================
   // IMAGE URL
   // =====================================================
 
-  const getImageUrl =
-    (image) => {
+  const getImageUrl = (image) => {
+    if (!image) {
+      return "";
+    }
 
-      if (!image) {
-        return "";
-      }
+    // ---------------------------------------------------
+    // Already full URL
+    // ---------------------------------------------------
 
-      if (
-        image.startsWith("http")
-      ) {
-        return image;
-      }
+    if (
+      image.startsWith("http://") ||
+      image.startsWith("https://")
+    ) {
+      return image;
+    }
 
-      return `http://localhost:5000${image}`;
-    };
+    // ---------------------------------------------------
+    // Relative image path
+    // ---------------------------------------------------
 
+    return `${API_URL}${image}`;
+  };
 
   // =====================================================
   // JSX
@@ -661,25 +673,23 @@ function Journey() {
 
       </div>
 
-
       {/* =================================================
           TOP ACTIONS
       ================================================= */}
 
       {!loading &&
         !error && (
-
           <div className="journey-top">
 
             <div className="journey-count">
 
               {journeys.length}{" "}
+
               {journeys.length === 1
                 ? "completed trip"
                 : "completed trips"}
 
             </div>
-
 
             <div className="journey-actions">
 
@@ -698,7 +708,6 @@ function Journey() {
 
               </button>
 
-
               <button
                 className="add-journey-btn"
                 onClick={
@@ -715,16 +724,13 @@ function Journey() {
             </div>
 
           </div>
-
         )}
-
 
       {/* =================================================
           LOADING
       ================================================= */}
 
       {loading && (
-
         <div className="loading-box">
 
           <RefreshCw size={30} />
@@ -734,9 +740,7 @@ function Journey() {
           </p>
 
         </div>
-
       )}
-
 
       {/* =================================================
           ERROR
@@ -744,7 +748,6 @@ function Journey() {
 
       {!loading &&
         error && (
-
           <div className="empty-journey">
 
             <MapPin
@@ -775,9 +778,7 @@ function Journey() {
             </button>
 
           </div>
-
         )}
-
 
       {/* =================================================
           EMPTY
@@ -786,7 +787,6 @@ function Journey() {
       {!loading &&
         !error &&
         journeys.length === 0 && (
-
           <div className="empty-journey">
 
             <MapPin
@@ -802,7 +802,6 @@ function Journey() {
               will appear here.
             </p>
 
-
             <button
               className="add-journey-btn"
               onClick={
@@ -817,9 +816,7 @@ function Journey() {
             </button>
 
           </div>
-
         )}
-
 
       {/* =================================================
           JOURNEY LIST
@@ -828,7 +825,6 @@ function Journey() {
       {!loading &&
         !error &&
         journeys.length > 0 && (
-
           <div className="journey-list">
 
             {journeys.map(
@@ -849,11 +845,10 @@ function Journey() {
                         journey.image
                       )}
                       alt={
-                        journey.place
+                        journey.place ||
+                        "Journey"
                       }
-                      onError={(
-                        e
-                      ) => {
+                      onError={(e) => {
                         e.currentTarget.style.display =
                           "none";
                       }}
@@ -870,7 +865,6 @@ function Journey() {
                     </div>
 
                   )}
-
 
                   {/* CONTENT */}
 
@@ -902,21 +896,19 @@ function Journey() {
 
                     </div>
 
-
                     {/* MESSAGE */}
 
                     {journey.message && (
-
                       <div className="journey-message">
 
                         <span>
-                          {journey.message}
+                          {
+                            journey.message
+                          }
                         </span>
 
                       </div>
-
                     )}
-
 
                     {/* INFO */}
 
@@ -936,7 +928,6 @@ function Journey() {
 
                       </div>
 
-
                       <div>
 
                         <Clock
@@ -951,7 +942,6 @@ function Journey() {
 
                       </div>
 
-
                       <span className="completed">
 
                         {
@@ -964,7 +954,6 @@ function Journey() {
                     </div>
 
                   </div>
-
 
                   {/* DELETE */}
 
@@ -985,21 +974,17 @@ function Journey() {
                   </button>
 
                 </div>
-
               )
             )}
 
           </div>
-
         )}
-
 
       {/* =================================================
           ADD JOURNEY MODAL
       ================================================= */}
 
       {showAddForm && (
-
         <div className="modal-overlay">
 
           <div className="journey-modal">
@@ -1025,19 +1010,13 @@ function Journey() {
 
             </div>
 
-
             {/* ERROR */}
 
             {formError && (
-
               <div className="form-error">
-
                 {formError}
-
               </div>
-
             )}
-
 
             <form
               onSubmit={
@@ -1066,7 +1045,6 @@ function Journey() {
                 />
 
               </div>
-
 
               {/* MESSAGE */}
 
@@ -1101,7 +1079,6 @@ function Journey() {
 
               </div>
 
-
               {/* IMAGE */}
 
               <div className="journey-form-group">
@@ -1118,9 +1095,7 @@ function Journey() {
                   }
                 />
 
-
                 {imagePreview && (
-
                   <div className="image-preview">
 
                     <img
@@ -1133,7 +1108,6 @@ function Journey() {
                     <button
                       type="button"
                       onClick={() => {
-
                         setSelectedImage(
                           null
                         );
@@ -1141,7 +1115,6 @@ function Journey() {
                         setImagePreview(
                           ""
                         );
-
                       }}
                     >
 
@@ -1150,11 +1123,9 @@ function Journey() {
                     </button>
 
                   </div>
-
                 )}
 
               </div>
-
 
               {/* DATE */}
 
@@ -1177,7 +1148,6 @@ function Journey() {
 
               </div>
 
-
               {/* TIME */}
 
               <div className="journey-form-group">
@@ -1199,7 +1169,6 @@ function Journey() {
 
               </div>
 
-
               {/* SAVE */}
 
               <button
@@ -1209,27 +1178,21 @@ function Journey() {
               >
 
                 {saving ? (
-
                   <>
                     <RefreshCw
                       size={18}
                     />
 
                     Saving...
-
                   </>
-
                 ) : (
-
                   <>
                     <Save
                       size={18}
                     />
 
                     Save Journey
-
                   </>
-
                 )}
 
               </button>
@@ -1239,7 +1202,6 @@ function Journey() {
           </div>
 
         </div>
-
       )}
 
     </div>
